@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>品 THÉ SAVOR — 台灣磨茶專賣</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Serif+JP:wght@500;700&family=Noto+Serif+KR:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500&family=Noto+Sans+KR:wght@400;500&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#132A1D;
+  --forest:#1B3D28;
+  --cream:#EFE9DC;
+  --cream-warm:#E6DFCC;
+  --line:rgba(19,42,29,.16);
+  --ink:#1A231C;
+  --light-ox:#B9C36B;
+  --med-ox:#B5651D;
+  --heavy-ox:#5B2E1D;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Noto Sans TC','Noto Sans JP','Noto Sans KR',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+button,input{font:inherit}
+.display{font-family:'Noto Serif TC','Noto Serif JP','Noto Serif KR',serif}
+.logotype{font-family:'Cormorant Garamond',serif}
+.hero{padding:40px 24px 24px;text-align:center}
+.hero-logo{display:flex;justify-content:center;align-items:center;margin-bottom:18px}
+.hero-logo img{display:block;width:min(360px,78vw);height:auto;object-fit:contain}
+.lang-bar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.lang-btn{
+  border:1px solid var(--line);
+  background:transparent;
+  color:rgba(26,35,28,.58);
+  padding:7px 15px;
+  font-size:12.5px;
+  letter-spacing:.06em;
+  cursor:pointer;
+  border-radius:999px;
+  transition:.18s ease;
+}
+.lang-btn.active{background:var(--forest);border-color:var(--forest);color:var(--cream)}
+.lang-btn:hover{border-color:var(--forest);color:var(--forest)}
+.lang-btn.active:hover{color:var(--cream)}
+.search-wrap{max-width:920px;margin:0 auto;padding:0 20px 6px}
+.search-box{position:relative}
+.search-box input{
+  width:100%;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.26);
+  color:var(--ink);
+  border-radius:999px;
+  padding:12px 44px 12px 17px;
+  outline:none;
+  transition:.18s ease;
+  font-size:16px; /* 防止 iOS 點擊輸入框時自動放大畫面 */
+}
+.search-box input:focus{border-color:var(--forest);box-shadow:0 0 0 3px rgba(27,61,40,.08)}
+.search-icon{position:absolute;right:16px;top:50%;transform:translateY(-50%);opacity:.56;pointer-events:none}
+.tabs{
+  max-width:920px;
+  margin:18px auto 0;
+  display:flex;
+  gap:2px;
+  overflow-x:auto;
+  border-bottom:1px solid var(--line);
+  padding:0 20px;
+  scrollbar-width:thin;
+}
+.tab{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:14px 16px 12px;
+  font-size:13.5px;
+  font-weight:500;
+  color:rgba(26,35,28,.48);
+  background:none;
+  border:none;
+  cursor:pointer;
+  white-space:nowrap;
+  border-bottom:2px solid transparent;
+  margin-bottom:-1px;
+}
+.tab.active{color:var(--deep);border-bottom-color:var(--med-ox);font-weight:700}
+.mobile-nav{background:var(--cream)}
+main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
+.promo{background:var(--forest);color:var(--cream);padding:12px 18px;font-size:12.5px;line-height:1.7;margin-bottom:10px;border-radius:2px}
+.promo+.promo{margin-top:-2px}
+.promo-wrap{margin-bottom:24px}
+.section-label{display:flex;align-items:baseline;gap:10px;margin:0 0 18px}
+.section-label h2{font-size:20px;margin:0;color:var(--deep);font-weight:700}
+.category-visual{
+  width:100%;
+  max-width:900px;
+  margin:0 auto 30px;
+  aspect-ratio:18/7;
+  border-radius:10px;
+  overflow:hidden;
+  background:var(--cream-warm);
+  border:1px solid var(--line);
+  position:relative;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.category-visual img{width:100%;height:100%;object-fit:cover;display:none}
+.category-visual .placeholder-ico{font-size:42px;opacity:.5}
+.category-visual .upload-hint{
+  position:absolute;inset:0;background:rgba(19,42,29,.68);color:var(--cream);
+  font-size:12px;line-height:1.6;display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .15s;text-align:center;padding:20px;
+}
+.category-visual:hover .upload-hint{opacity:1}
+.category-visual input[type=file]{display:none}
+
+.catalog-layout{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  align-items:stretch;
+}
+.catalog-visual{
+  min-width:0;
+  position:relative;
+  width:100%;
+}
+.catalog-visual .category-visual{
+  width:600px;
+  max-width:100%;
+  height:auto;
+  min-height:0;
+  margin:0 auto;
+  aspect-ratio:16/9;
+  border-radius:0;
+}
+.catalog-visual .category-visual img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+.catalog-content{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+.catalog-content .promo-wrap{
+  margin:0 0 0;
+}
+.catalog-content .promo{
+  border-radius:0;
+  margin:0;
+  padding:7px 14px;
+  font-size:12.5px;
+  line-height:1.55;
+  background:#E6E8BC;
+  color:var(--deep);
+}
+.catalog-content .promo + .promo{
+  margin-top:0;
+  border-top:1px solid rgba(19,42,29,.12);
+}
+.catalog-head{
+  display:grid;
+  grid-template-columns:minmax(220px,38%) 1fr;
+  background:#877E70;
+  color:#fff;
+  min-height:32px;
+  align-items:center;
+}
+.catalog-head-title,
+.catalog-head-notes{
+  padding:5px 14px;
+  font-size:14px;
+  letter-spacing:.06em;
+  font-weight:500;
+}
+.catalog-head-notes{
+  border-left:1px solid rgba(255,255,255,.35);
+}
+.catalog-head-notes .en{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;
+  margin-left:5px;
+  letter-spacing:.04em;
+}
+.catalog-items{
+  flex:1;
+}
+.catalog-row{
+  display:grid;
+  grid-template-columns:minmax(220px,38%) 1fr;
+  border-bottom:1px solid rgba(19,42,29,.15);
+  min-height:88px;
+}
+.catalog-product{
+  display:grid;
+  grid-template-columns:12px minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+  padding:8px 12px 8px 0;
+}
+.catalog-swatch{
+  width:12px;
+  height:20px;
+  align-self:start;
+  margin-top:3px;
+}
+.catalog-name{
+  min-width:0;
+}
+.catalog-name-primary{
+  font-family:'Noto Serif TC','Noto Serif JP','Noto Serif KR',serif;
+  font-size:16px;
+  font-weight:700;
+  line-height:1.25;
+  color:var(--ink);
+}
+.catalog-name-secondary{
+  font-size:13px;
+  line-height:1.2;
+  color:rgba(26,35,28,.78);
+  margin-top:2px;
+}
+.catalog-meta{
+  font-size:10.5px;
+  line-height:1.45;
+  color:rgba(26,35,28,.56);
+  margin-top:5px;
+}
+.catalog-price{
+  min-width:76px;
+  text-align:right;
+  white-space:nowrap;
+}
+.catalog-price .price{
+  display:block;
+  font-size:27px;
+  line-height:1;
+  color:#111;
+}
+.catalog-price-label{
+  font-size:10.5px;
+  margin-top:4px;
+  color:var(--ink);
+}
+.catalog-notes{
+  border-left:1px solid rgba(19,42,29,.15);
+  padding:9px 14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.catalog-desc-primary{
+  font-size:12.5px;
+  line-height:1.55;
+  color:var(--ink);
+}
+.catalog-desc-secondary{
+  font-size:11.5px;
+  line-height:1.4;
+  color:rgba(26,35,28,.68);
+  margin-top:3px;
+}
+
+.product-list{
+  margin-top:8px;
+}
+.product-list-item{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:18px;
+  min-height:160px;
+  padding:22px 18px 22px 22px;
+  border-bottom:1px dashed rgba(19,42,29,.18);
+  background:transparent;
+}
+.product-list-item:last-child{
+  border-bottom:none;
+}
+.product-list-bar{
+  position:absolute;
+  left:0;
+  top:22px;
+  bottom:22px;
+  width:4px;
+  border-radius:2px;
+}
+.product-list-main{
+  min-width:0;
+}
+.product-list-origin{
+  font-size:10.5px;
+  line-height:1.35;
+  color:rgba(26,35,28,.45);
+  margin-bottom:8px;
+  letter-spacing:.02em;
+}
+.product-list-name{
+  margin:0;
+  font-family:'Noto Serif TC','Noto Serif JP','Noto Serif KR',serif;
+  font-size:17px;
+  font-weight:700;
+  line-height:1.35;
+  color:var(--ink);
+}
+.product-list-name .ih{
+  font-size:11px;
+  font-weight:400;
+  color:rgba(26,35,28,.48);
+  margin-left:8px;
+}
+.product-list-desc{
+  margin:7px 0 0;
+  font-size:12.5px;
+  line-height:1.65;
+  color:rgba(26,35,28,.66);
+  max-width:700px;
+}
+.product-list-specs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  margin-top:9px;
+}
+.product-list-spec{
+  font-size:11px;
+  color:rgba(26,35,28,.55);
+}
+.product-list-spec b{
+  color:var(--deep);
+  font-weight:700;
+  margin-right:4px;
+}
+.product-list-flavor{
+  display:inline-block;
+  margin-top:9px;
+  padding:2px 9px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:10.5px;
+  color:var(--deep);
+}
+.product-list-price{
+  align-self:start;
+  text-align:right;
+  white-space:nowrap;
+  padding-top:2px;
+}
+.product-list-price .price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:21px;
+  font-weight:700;
+  color:var(--deep);
+}
+.product-list-price .label{
+  margin-top:3px;
+  font-size:10px;
+  color:rgba(26,35,28,.48);
+}
+.product-list-addon{
+  margin-top:4px;
+  font-size:10px;
+  color:var(--med-ox);
+  font-weight:700;
+}
+
+.catalog-addon{
+  font-size:10px;
+  color:var(--med-ox);
+  margin-top:4px;
+  font-weight:700;
+}
+
+.search-section{margin-top:30px}
+.search-section:first-child{margin-top:0}
+.item{border-bottom:1px dashed var(--line);padding:20px 0;display:flex;gap:12px;align-items:flex-start}
+.item:first-child{padding-top:0}
+.item-img{
+  width:140px;
+  height:140px;
+  border-radius:8px;
+  flex:0 0 140px;
+  background:var(--cream-warm);
+  border:1px solid var(--line);
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.item-img img{width:140px;height:140px;object-fit:cover;display:none}
+.item-img .placeholder-ico{font-size:24px;opacity:.55}
+.item-img .upload-hint{
+  position:absolute;
+  inset:0;
+  background:rgba(19,42,29,.68);
+  color:var(--cream);
+  font-size:9px;
+  line-height:1.45;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition:opacity .15s;
+  text-align:center;
+  padding:10px;
+}
+.item-img:hover .upload-hint{opacity:1}
+.item-img input[type=file]{display:none}
+.upload-tip{font-size:11.5px;color:rgba(26,35,28,.5);margin:-8px 0 20px;font-style:italic}
+.ox-bar{width:4px;align-self:stretch;border-radius:2px;flex-shrink:0;margin-top:4px}
+.item-main{flex:1;min-width:0}
+.origin-line{font-size:10.5px;color:rgba(26,35,28,.5);margin-bottom:4px;letter-spacing:.02em}
+.item-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.item-name{font-size:17px;font-weight:700;color:var(--ink);margin:0}
+.item-name .ih{font-size:11px;font-weight:400;color:rgba(26,35,28,.55);margin-left:6px}
+.price{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--deep);white-space:nowrap}
+.price-pair{display:flex;gap:14px;flex-wrap:wrap}
+.price-pair .pp{text-align:right}
+.price-pair .pp .lbl{font-size:10px;color:rgba(26,35,28,.5);display:block}
+.item-desc{font-size:12.5px;color:rgba(26,35,28,.67);margin:7px 0 0;line-height:1.7;max-width:560px}
+.spec-row{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap}
+.spec{font-size:11px;color:rgba(26,35,28,.55)}
+.spec b{color:var(--deep);font-weight:700}
+.flavor-tag{display:inline-block;font-size:10.5px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--deep);margin-top:9px}
+.addon-price{font-size:11px;font-family:'Noto Sans TC','Noto Sans JP','Noto Sans KR',sans-serif;color:var(--med-ox);font-weight:500;margin-top:2px}
+.info-panel{background:var(--cream-warm);border:1px solid var(--line);border-radius:2px;padding:16px 20px;margin-top:26px}
+.info-panel h3{font-size:13px;margin:0 0 10px;color:var(--deep);font-weight:700}
+.info-row{display:flex;justify-content:space-between;gap:12px;font-size:12px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.info-row:last-child{border-bottom:none}
+.info-row .k{color:rgba(26,35,28,.55)}
+.info-row .v{font-weight:700;color:var(--deep);text-align:right}
+.legend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.legend-item{font-size:12px}
+.legend-item .name{font-weight:700;color:var(--deep);margin-bottom:3px}
+.legend-item .desc{color:rgba(26,35,28,.6);font-size:11.5px;line-height:1.5}
+.empty-state{padding:54px 20px;text-align:center;color:rgba(26,35,28,.58);border:1px dashed var(--line);border-radius:8px}
+.empty-state strong{display:block;color:var(--deep);margin-bottom:6px}
+footer{background:var(--forest);color:var(--cream);text-align:center;padding:22px 24px;font-size:11.5px;letter-spacing:.08em}
+@media (max-width:680px){
+  .hero{padding:30px 18px 20px}
+  .search-wrap,.tabs,main{padding-left:16px;padding-right:16px}
+  main{padding-top:24px;padding-bottom:54px}
+  .item{gap:12px}
+  .item-img,.item-img img{width:120px;height:120px}
+  .item-img{flex-basis:120px}
+  .item-name{font-size:16px}
+  .price{font-size:18px}
+  /* 搜尋列＋分類頁籤 在手機上捲動時固定在頂部，方便切換 */
+  .mobile-nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    padding-top:10px;
+    box-shadow:0 4px 10px rgba(19,42,29,.06);
+  }
+  .mobile-nav .tabs{margin-top:10px}
+  /* 加大可點擊區域，手指更好操作 */
+  .lang-btn{padding:9px 16px;min-height:36px}
+  .tab{padding:14px 14px;min-height:44px}
+  .category-visual{max-height:52vw}
+}
+@media (max-width:100%){
+  .hero-logo img{width:min(300px,82vw)}
+  .category-visual{max-width:100%;margin-bottom:24px}
+  .lang-btn{padding:6px 12px;font-size:12px}
+  .tab{padding:12px 13px 10px;font-size:12.5px}
+  .item{display:grid;grid-template-columns:92px 4px minmax(0,1fr);gap:10px}
+  .item.no-ox{grid-template-columns:92px minmax(0,1fr)}
+  .item-img,.item-img img{width:92px;height:92px}
+  .item-img{flex-basis:92px;border-radius:6px}
+  .ox-bar{grid-column:2;grid-row:1;min-height:92px}
+  .item-main{grid-column:3;grid-row:1}
+  .item.no-ox .item-main{grid-column:2}
+  .item-top{flex-direction:column;align-items:flex-start;gap:5px}
+  .price-pair{gap:16px}
+  .price-pair .pp{text-align:left}
+  .item-desc{font-size:12px;line-height:1.6}
+  .spec-row{gap:8px 12px}
+  .upload-tip{line-height:1.5}
+}
+@media (max-width:390px){
+  .item{grid-template-columns:82px 4px minmax(0,1fr)}
+  .item.no-ox{grid-template-columns:82px minmax(0,1fr)}
+  .item-img,.item-img img{width:82px;height:82px}
+  .ox-bar{min-height:82px}
+  .item-name{font-size:15px}
+}
+
+@media (max-width:760px){
+  .catalog-layout{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+.catalog-visual .category-visual{
+  width:100%;
+  max-width:920px;
+  height:auto;
+  margin:0 auto;
+  aspect-ratio:16/9;
+  border-radius:8px;
+}
+  .catalog-head{
+    grid-template-columns:1fr;
+  }
+  .catalog-head-notes{
+    display:none;
+  }
+  .catalog-row{
+    grid-template-columns:1fr;
+    min-height:0;
+    padding:12px 0;
+  }
+  .catalog-product{
+    grid-template-columns:10px minmax(0,1fr) auto;
+    padding:0 4px 7px 0;
+  }
+  .catalog-notes{
+    border-left:none;
+    padding:0 14px 0 20px;
+  }
+}
+@media (max-width:420px){
+  .catalog-product{
+    grid-template-columns:8px minmax(0,1fr) auto;
+    gap:8px;
+  }
+  .catalog-swatch{
+    width:8px;
+  }
+  .catalog-name-primary{
+    font-size:15px;
+  }
+  .catalog-name-secondary{
+    font-size:12px;
+  }
+  .catalog-price{
+    min-width:64px;
+  }
+  .catalog-price .price{
+    font-size:24px;
+  }
+}
+
+
+@media (max-width:520px){
+  .product-list-item{
+    grid-template-columns:1fr;
+    gap:8px;
+    min-height:0;
+    padding:18px 10px 18px 18px;
+  }
+  .product-list-bar{
+    top:18px;
+    bottom:18px;
+  }
+  .product-list-price{
+    text-align:left;
+    padding-top:0;
+  }
+  .product-list-specs{
+    gap:8px 14px;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-logo">
+    <img src="images/logo.png" alt="THÉ SAVOR Logo">
+  </div>
+  <div class="lang-bar">
+    <button class="lang-btn active" data-lang="zh">中文</button>
+    <button class="lang-btn" data-lang="en">English</button>
+    <button class="lang-btn" data-lang="ja">日本語</button>
+    <button class="lang-btn" data-lang="ko">한국어</button>
+  </div>
+</div>
+
+<div class="mobile-nav">
+  <div class="search-wrap">
+    <div class="search-box">
+      <input id="searchInput" type="search" autocomplete="off" aria-label="搜尋商品">
+      <span class="search-icon">⌕</span>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+</div>
+<main id="main"></main>
+<footer id="footer"></footer>
+
+<script>
+const UI = {
+  zh:{unitBag:"包",unitBox:"盒",ih:"冰／熱",origin:"茶葉產地",oxidation:"發酵度",roast:"焙度",craft:"焙煎工藝",bagPrice:"茶包",boxPrice:"原葉茶",dripPrice:"濾掛包",footer:"感受台灣茶最純粹的風味",uploadTip:"正式圖片請放入 images 資料夾；點擊圖片可先在本機測試預覽",searchPlaceholder:"搜尋茶品、口味或商品介紹…",searchResult:"搜尋結果",noResult:"找不到符合的商品",noResultHint:"請嘗試其他關鍵字"},
+  en:{unitBag:"bag",unitBox:"box",ih:"Iced / Hot",origin:"Tea Origin",oxidation:"Oxidation",roast:"Roast Level",craft:"Craftsmanship",bagPrice:"Tea Bag",boxPrice:"Loose Leaf",dripPrice:"Drip Bag",footer:"Taste the purest flavor of Taiwanese tea",uploadTip:"Add real photos to the images folder; click a photo to test a local preview",searchPlaceholder:"Search tea, flavor, or description…",searchResult:"Search Results",noResult:"No matching products",noResultHint:"Try another keyword"},
+  ja:{unitBag:"包",unitBox:"箱",ih:"アイス／ホット",origin:"茶の原産地",oxidation:"発酵度",roast:"焙煎度",craft:"焙煎工芸",bagPrice:"ティーバッグ",boxPrice:"原葉茶",dripPrice:"ドリップバッグ",footer:"台湾茶の最も純粋な味わいを",uploadTip:"正式な写真は images フォルダに追加してください。クリックするとローカルでプレビューできます",searchPlaceholder:"茶名・風味・商品説明を検索…",searchResult:"検索結果",noResult:"該当する商品が見つかりません",noResultHint:"別のキーワードをお試しください"},
+  ko:{unitBag:"팩",unitBox:"박스",ih:"아이스 / 핫",origin:"차 원산지",oxidation:"발효도",roast:"배전 정도",craft:"배전 공예",bagPrice:"티백",boxPrice:"원엽차",dripPrice:"드립백",footer:"대만차의 가장 순수한 맛을 느껴보세요",uploadTip:"실제 사진은 images 폴더에 추가하세요. 클릭하면 로컬에서 미리보기 가능합니다",searchPlaceholder:"차, 풍미 또는 상품 설명 검색…",searchResult:"검색 결과",noResult:"일치하는 상품이 없습니다",noResultHint:"다른 키워드를 입력해 보세요"}
+};
+
+const milkTeaProducts = [
+  {id:"jinxuan-milktea",name:{zh:"阿里山金萱奶茶",en:"Alishan Jinxuan Milk Tea",ja:"阿里山金萱ミルクティー",ko:"알리산 진쉬안 밀크티"},bag:55,box:350,drip:70,flavor:{zh:"奶香甜潤",en:"Milky & Sweet",ja:"ミルク感のある甘さ",ko:"밀키 & 스위트"},desc:{zh:"嚴選阿里山金萱，以柔和乳香與清甜茶韻交織，入口圓潤、尾韻細緻。",en:"Selected Alishan Jinxuan with a soft milky aroma and gentle sweetness, finishing smooth and refined.",ja:"阿里山金萱を厳選。やわらかなミルク香と澄んだ甘みが重なり、まろやかな余韻が続きます。",ko:"알리산 진쉬안을 엄선해 부드러운 우유 향과 맑은 단맛이 어우러지며 섬세한 여운을 남깁니다."}},
+  {id:"oriental-beauty-milktea",name:{zh:"東方美人奶茶",en:"Oriental Beauty Milk Tea",ja:"東方美人ミルクティー",ko:"동방미인 밀크티"},bag:60,box:350,drip:75,flavor:{zh:"果香蜜韻",en:"Fruity & Honey",ja:"果実と蜂蜜の香り",ko:"프루티 & 허니"},desc:{zh:"熟果與蜂蜜般的天然香氣層層展開，茶湯柔順甜潤，帶有優雅熟果尾韻。",en:"Natural honeyed fruit notes unfold in layers, with a smooth liquor and elegant ripe-fruit finish.",ja:"熟した果実とはちみつを思わせる香りが幾層にも広がり、なめらかで甘みのある余韻。",ko:"잘 익은 과일과 꿀을 닮은 자연스러운 향이 겹겹이 펼쳐지고 부드럽고 달콤한 여운이 이어집니다."}},
+  {id:"yuchi-ruby-milktea",name:{zh:"魚池紅玉奶茶",en:"Yuchi Ruby Black Milk Tea",ja:"魚池紅玉ミルクティー",ko:"위츠향 홍옥  밀크티"},bag:55,box:350,drip:70,flavor:{zh:"醇厚焙香",en:"Roasted & Warm",ja:"焙煎香とコク",ko:"로스티드 & 웜"},desc:{zh:"台灣紅玉特有的肉桂與薄荷氣息，茶感飽滿醇厚，溫潤中帶清爽辛香。",en:"Taiwan Ruby tea reveals signature cinnamon and mint notes with a full body and refreshing spice.",ja:"台湾紅玉ならではのシナモンとミントの香り。厚みのある味わいに爽やかなスパイス感。",ko:"대만 홍옥 특유의 시나몬과 민트 향, 풍부한 바디감과 산뜻한 스파이스 여운이 특징입니다."}},
+  {id:"rose-oolong-milktea",name:{zh:"玫瑰烏龍奶茶",en:"Rose Oolong Milk Tea",ja:"ローズ烏龍ミルクティー",ko:"로즈 우롱 밀크티"},bag:55,box:350,drip:70,flavor:{zh:"果香蜜韻",en:"Fruity & Honey",ja:"果実と蜂蜜の香り",ko:"프루티 & 허니"},desc:{zh:"清雅玫瑰花香與烏龍茶韻相互融合，香氣明亮，入口柔和而不甜膩。",en:"Elegant rose aromatics meet smooth oolong character for a bright, gentle, never cloying cup.",ja:"上品なバラの香りとウーロン茶の風味が調和し、華やかでやさしい飲み口。",ko:"우아한 장미 향과 우롱차의 풍미가 조화를 이루며 화사하고 부드럽게 마무리됩니다."}},
+  {id:"pinglin-tieguanyin-milktea",name:{zh:"坪林鐵觀音奶茶",en:"Pinglin Tieguanyin Milk Tea",ja:"坪林鉄観音ミルクティー",ko:"핑린 철관음  밀크티"},bag:70,box:350,drip:80,flavor:{zh:"清新花香",en:"Fresh & Floral",ja:"爽やかな花の香り",ko:"프레시 & 플로럴"},desc:{zh:"以坪林茶區風土孕育的觀音茶韻為核心，花香細緻、焙火溫暖，回甘綿長。",en:"A Pinglin-grown tea with delicate florals, warm roast notes, and a long, sweet finish.",ja:"坪林の風土が育む繊細な花香と温かな焙煎香。長く続く甘い余韻が魅力。",ko:"핑린의 풍토가 길러낸 섬세한 꽃향과 따뜻한 배전 향, 길고 달콤한 여운이 매력적입니다."}},
+  {id:"taitung-red-oolong-milktea",name:{zh:"台東紅烏龍奶茶",en:"Taitung Red Milk Tea",ja:"台東紅烏龍ミルクティー",ko:"타이둥 홍우롱 밀크티"},bag:70,box:350,drip:80,flavor:{zh:"醇厚焙香",en:"Roasted & Warm",ja:"焙煎香とコク",ko:"로스티드 & 웜"},desc:{zh:"重發酵與焙火交織出成熟果香、焦糖與木質調性，口感厚實，冷熱皆有深度。",en:"Heavy oxidation and roast create ripe fruit, caramel, and woody notes with a deep, full-bodied finish.",ja:"重発酵と焙煎が熟した果実、キャラメル、木質香を引き出し、深く厚みのある味わい。",ko:"강한 발효와 배전이 잘 익은 과일, 캐러멜, 우디 노트를 만들어 깊고 묵직한 맛을 냅니다."}}
+];
+
+const dripTeaProducts = [
+  {id:"jinxuan-drip",name:{zh:"阿里山金萱茶",en:"Alishan Jinxuan Tea",ja:"阿里山金萱茶",ko:"알리산 진쉬안차"},drip:55,flavor:{zh:"淡奶香・果香",en:"Light Milk & Fruit",ja:"淡いミルク香・果実香",ko:"은은한 밀키 향・과일 향"},desc:{zh:"阿里山金萱茶香清雅，帶自然淡奶香與細緻果香，茶湯柔順甘甜。",en:"Alishan Jinxuan offers a refined aroma with naturally light milky and fruity notes, finishing smooth and sweet.",ja:"阿里山金萱の上品な香り。自然な淡いミルク香と果実香が広がり、なめらかで甘みのある味わい。",ko:"알리산 진쉬안의 우아한 향과 자연스러운 은은한 밀키 향, 과일 향이 어우러져 부드럽고 달콤합니다."}},
+  {id:"oriental-beauty-drip",name:{zh:"東方美人茶",en:"Oriental Beauty Tea",ja:"東方美人茶",ko:"동방미인차"},drip:60,flavor:{zh:"花蜜香・蜂蜜香",en:"Floral Honey & Honeyed",ja:"花蜜香・蜂蜜香",ko:"꽃꿀 향・꿀 향"},desc:{zh:"天然熟果與蜂蜜香氣層層展開，茶湯柔順甜潤，尾韻細緻。",en:"Natural ripe-fruit and honeyed aromas unfold in layers, with a smooth liquor and delicate finish.",ja:"熟した果実と蜂蜜を思わせる香りが幾層にも広がり、なめらかで繊細な余韻。",ko:"잘 익은 과일과 꿀을 닮은 향이 겹겹이 펼쳐지고 부드럽고 섬세한 여운이 이어집니다."}},
+  {id:"yuchi-ruby-drip",name:{zh:"魚池紅玉紅茶",en:"Yuchi Ruby Black Tea",ja:"魚池紅玉紅茶",ko:"위츠 홍옥 홍차"},drip:55,flavor:{zh:"薄荷・肉桂",en:"Mint & Cinnamon",ja:"ミント・シナモン",ko:"민트・시나몬"},desc:{zh:"台灣紅玉特有的薄荷與肉桂氣息鮮明，茶感飽滿，帶清爽辛香。",en:"Taiwan Ruby black tea reveals signature mint and cinnamon notes with a full body and refreshing spice.",ja:"台湾紅玉ならではのミントとシナモンの香り。厚みのある味わいに爽やかなスパイス感。",ko:"대만 홍옥 특유의 민트와 시나몬 향이 선명하며 풍부한 바디감과 산뜻한 스파이스 여운이 특징입니다."}},
+  {id:"rose-oolong-drip",name:{zh:"玫瑰烏龍茶",en:"Rose Oolong Tea",ja:"ローズ烏龍茶",ko:"로즈 우롱차"},drip:55,flavor:{zh:"淡花香・清甜",en:"Delicate Floral & Sweet",ja:"淡い花香・清らかな甘み",ko:"은은한 꽃향・깔끔한 단맛"},desc:{zh:"清雅玫瑰花香與烏龍茶韻相互融合，香氣明亮，入口柔和清甜。",en:"Elegant rose aromatics meet smooth oolong character for a bright, gentle, lightly sweet cup.",ja:"上品なバラの香りとウーロン茶の風味が調和し、華やかでやさしい甘み。",ko:"우아한 장미 향과 우롱차의 풍미가 조화를 이루며 화사하고 부드러운 단맛을 냅니다."}},
+  {id:"pinglin-tieguanyin-drip",name:{zh:"坪林鐵觀音茶",en:"Pinglin Tieguanyin Tea",ja:"坪林鉄観音茶",ko:"핑린 철관음차"},drip:70,flavor:{zh:"熟果香・熟火香",en:"Ripe Fruit & Roasted",ja:"熟果香・焙煎香",ko:"숙성 과일 향・구수한 로스팅 향"},desc:{zh:"中重焙火帶出熟果與烘焙香氣，茶湯醇厚，回甘綿長。",en:"Medium-heavy roasting brings out ripe-fruit and toasted notes, with a mellow body and long sweet finish.",ja:"中強焙煎が熟した果実と焙煎香を引き出し、コクのある味わいと長い甘み。",ko:"중강배전으로 숙성 과일과 구수한 향이 살아나며 진하고 긴 단맛이 이어집니다."}},
+  {id:"taitung-red-oolong-drip",name:{zh:"台東紅烏龍茶",en:"Taitung Red Oolong Tea",ja:"台東紅烏龍茶",ko:"타이둥 홍우롱차"},drip:70,flavor:{zh:"熟果香・蔗糖香",en:"Ripe Fruit & Cane Sugar",ja:"熟果香・サトウキビ香",ko:"열대과일 향・흑설탕 향"},desc:{zh:"重發酵與焙火交織出成熟果香與蔗糖甜香，口感厚實、尾韻深長。",en:"Heavy oxidation and roast create ripe-fruit and cane-sugar sweetness with a deep, full-bodied finish.",ja:"重発酵と焙煎が熟した果実とサトウキビの甘い香りを引き出し、深く厚みのある味わい。",ko:"강한 발효와 배전이 잘 익은 과일과 흑설탕 같은 단향을 만들어 깊고 묵직한 맛을 냅니다."}}
+];
+
+const CATS = [
+  {id:"latte",ico:"🧋",name:{zh:"THÉ LATTE｜茶歐蕾",en:"THÉ LATTE",ja:"THÉ LATTE｜茶ラテ",ko:"THÉ LATTE｜티 라떼"},promos:[{zh:"※自備環保杯－10元",en:"Bring Your Own Cup & Save NT$10",ja:"マイカップ持参で10元引き",ko:"개인 컵 지참 시 10元 할인"},{zh:"購買茶歐蕾乙杯，即贈紅茶捲餅乙份",en:"Buy a Tea Latte, Get a Free Black Tea Crêpe",ja:"茶ラテを1杯ご購入で、紅茶ロールクッキーを1つプレゼント",ko:"티 라떼 한 잔 구매 시 홍차 크레페 1개 증정"}],items:[
+    {id:"jinxuan-latte",name:{zh:"阿里山金萱茶歐蕾",en:"Alishan Jinxuan Tea Latte",ja:"阿里山金萱ティーオレ",ko:"알리산 진쉬안차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:180,ihTag:true,ox:25,oxColor:"var(--light-ox)",roast:{zh:"烘乾（未焙火）",en:"Unroasted",ja:"乾燥（無焙煎）",ko:"건조(비배전)"},desc:{zh:"柔和金萱奶香與鮮奶融合，茶韻清甜，口感滑順。",en:"Soft Jinxuan milk notes blend with fresh milk for a smooth, lightly sweet finish.",ja:"金萱のやわらかなミルク香とミルクが溶け合う、なめらかな味わい。",ko:"진쉬안의 부드러운 우유 향과 신선한 우유가 어우러진 매끄러운 맛."}},
+    {id:"tieguanyin-latte",name:{zh:"坪林鐵觀音茶歐蕾",en:"Pinglin Tieguanyin Tea Latte",ja:"坪林鉄観音ティーオレ",ko:"핑린 철관음차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:180,ihTag:true,ox:35,oxColor:"var(--med-ox)",roast:{zh:"7分火（中重焙）",en:"Medium-Heavy Roast",ja:"七分焙煎（中強焙煎）",ko:"7부 배전(중강배전)"},desc:{zh:"焙火香氣沉穩，與奶香平衡融合，呈現成熟濃郁的茶歐蕾風味。",en:"Deep roasted tea character meets milk in a balanced, rich, and mature latte.",ja:"落ち着いた焙煎香とミルクが調和した、深みのあるティーラテ。",ko:"깊은 배전 향과 우유가 균형 있게 어우러진 진한 티 라떼."}},
+    {id:"red-oolong-latte",name:{zh:"台東紅烏龍茶歐蕾",en:"Taitung Red Oolong Tea Latte",ja:"台東紅烏龍ティーオレ",ko:"타이둥 홍우롱차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:180,ihTag:true,ox:80,oxColor:"var(--heavy-ox)",oxNote:{zh:"（重發酵）",en:" (Heavy Oxidation)",ja:"（重発酵）",ko:" (중발효)"},roast:{zh:"重烘焙",en:"Heavy Roast",ja:"深煎り（強焙煎）",ko:"깊은 로스팅(강배전)"},desc:{zh:"熟果、焦糖與木質茶韻濃郁飽滿，加入鮮奶後更顯圓潤厚實。",en:"Ripe fruit, caramel, and woody notes become even rounder and fuller with milk.",ja:"熟した果実、キャラメル、木質香がミルクでさらにまろやかに。",ko:"잘 익은 과일, 캐러멜, 우디 향이 우유와 만나 더욱 둥글고 풍부해집니다."}},
+    {id:"uji-matcha-latte",name:{zh:"日本宇治抹茶歐蕾",en:"Uji Matcha Latte",ja:"宇治抹茶ティーオレ",ko:"우지 말차 오레"},origin:{zh:"日本",en:"Japan",ja:"日本",ko:"일본"},price:250,ihTag:true,craft:{zh:"最佳品質荒茶",en:"Premium Quality Raw Tea",ja:"最高品質の荒茶",ko:"최고 품질의 아라차(荒茶)"},desc:{zh:"嚴選宇治抹茶，茶感濃厚鮮明，微苦回甘與奶香形成細緻平衡。",en:"Selected Uji matcha offers vivid tea depth, balancing gentle bitterness, sweetness, and milk.",ja:"宇治抹茶の濃厚な旨味とほろ苦さ、ミルクの甘みが繊細に調和。",ko:"우지 말차의 선명한 깊이와 은은한 쌉싸름함, 우유의 단맛이 섬세하게 조화를 이룹니다."}}
+  ]},
+  {id:"icecream",ico:"🧊",name:{zh:"THÉ ICE CREAM BAR｜台灣茶雪糕",en:"THÉ ICE CREAM BAR",ja:"THÉ ICE CREAM BAR｜茶アイスバー",ko:"THÉ ICE CREAM BAR｜티 아이스크림"},items:[
+    {id:"jinxuan-icecream",name:{zh:"阿里山金萱茶雪糕",en:"Alishan Jinxuan Tea Ice Cream Bar",ja:"阿里山金萱茶アイスバー",ko:"알리산 진쉬안차 아이스크림"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:60,desc:{zh:"金萱清甜茶香與奶香交融，入口清爽細緻。",en:"Fresh Jinxuan tea and milk notes blend into a clean, delicate frozen treat.",ja:"金萱の清らかな甘みとミルク香が溶け合う繊細な味。",ko:"진쉬안의 맑은 단맛과 우유 향이 어우러진 섬세한 아이스 바."}},
+    {id:"tieguanyin-icecream",name:{zh:"坪林鐵觀音茶雪糕",en:"Pinglin Tieguanyin Ice Cream Bar",ja:"坪林鉄観音茶アイスバー",ko:"핑린 철관음차 아이스크림"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:49,desc:{zh:"溫暖焙火與奶香交疊，風味濃郁卻不厚重。",en:"Warm roast notes layer with milk for a rich yet balanced bar.",ja:"温かな焙煎香とミルクが重なる、濃厚で軽やかな味わい。",ko:"따뜻한 배전 향과 우유 향이 겹쳐 진하지만 무겁지 않은 풍미."}},
+    {id:"red-oolong-icecream",name:{zh:"台東紅烏龍茶雪糕",en:"Taitung Red Oolong Ice Cream Bar",ja:"台東紅烏龍茶アイスバー",ko:"타이둥 홍우롱차 아이스크림"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:49,desc:{zh:"熟果與焙火茶韻鮮明，冰涼入口仍保有厚實回甘。",en:"Ripe fruit and roasted tea notes stay full and lingering even when frozen.",ja:"熟した果実と焙煎香が鮮明で、冷たい口どけの後にも深い甘み。",ko:"잘 익은 과일과 배전 향이 선명하며 차갑게 즐겨도 깊은 단맛이 남습니다."}},
+    {id:"vanilla-icecream",name:{zh:"香草牛奶雪糕",en:"Vanilla Milk Ice Cream Bar",ja:"バニラミルクアイスバー",ko:"바닐라 밀크 아이스크림"},price:49,desc:{zh:"香草與牛奶的經典組合，柔滑香甜，簡單耐吃。",en:"A timeless vanilla-and-milk pairing with a smooth, mellow sweetness.",ja:"バニラとミルクの王道コンビ。なめらかでやさしい甘さ。",ko:"바닐라와 우유의 클래식한 조합, 부드럽고 편안한 단맛."}}
+  ]},
+  {id:"nougat",ico:"🍬",name:{zh:"THÉ NOUGAT｜茶牛軋糖",en:"THÉ NOUGAT",ja:"THÉ NOUGAT｜ヌガー",ko:"THÉ NOUGAT｜누가"},promos:[{zh:"任選3盒，贈捲餅1盒，加碼贈品牌經典編織袋乙個",en:"Buy Any 3 Boxes, Get 1 Box of Crêpes Free — Plus a Free Branded Bag",ja:"3箱お選びいただくとロールクッキー1箱を無料進呈、さらにブランドオリジナルバッグもプレゼント",ko:"3박스 선택 시 크레페 1박스 무료 증정, 브랜드 클래식 에코백까지 증정"}],items:[
+    {id:"original-nougat",name:{zh:"經典原味・牛軋糖",en:"Original Flavor Nougat",ja:"プレーン クラシックオリジナル",ko:"클래식 오리지널 누가"},price:300,desc:{zh:"香濃牛奶熬製而成，加入飽滿杏仁果粒，口感Q彈不黏牙，奶香濃郁中帶有堅果酥脆層次。",en:"Made with premium milk and generously filled with crunchy almond. Soft, chewy, and non-sticky, delivering a rich milky flavor with delightful nutty crunch.",ja:"濃厚なミルクに、香ばしいアーモンドをたっぷり加えました。もちもちで歯にくっつかず、ミルクのコクとナッツのサクサク感が楽しめます。",ko:"진하게 끓여낸 우유로 만든 누가에 통아몬드를 듬뿍 넣었습니다. 쫀득하면서도 이에 달라붙지 않는 식감과 진한 우유 풍미, 바삭한 아몬드의 조화가 매력적입니다."}},
+    {id:"amber-oolong-nougat",name:{zh:"琥珀烏龍青・牛軋糖",en:"Amber Oolong Green Tea Nougat",ja:"コハクウーロン茶 アンバーウーロングリーン",ko:"앰버 우롱 그린티 누가"},price:350,desc:{zh:"嚴選琥珀烏龍茶入料，茶香醇厚帶有淡雅焙香，融合香濃牛奶與杏仁果粒，口感Q彈不黏牙，茶韻回甘悠長。",en:"Made with premium Taiwanese Amber Oolong, offering a rich tea aroma with subtle roasted notes. Blended with milk and crunchy almonds for a soft, chewy texture and a lingering sweet tea finish.",ja:"厳選された台湾の「琥珀烏龍茶」を使用し、ほのかな焙煎香が漂う豊かな茶の香りを引き出しました。まろやかなミルク、そしてサクサクとしたアーモンドを組み合わせることで、もちもちとした柔らかな食感と、心地よく続くお茶の甘い余韻をお楽しみいただけます。",ko:"엄선한 대만 호박 우롱차를 사용하여 깊은 차 향과 은은한 볶은 향을 담았습니다. 진한 우유와 아몬드가 어우러져 쫀득한 식감과 긴 여운의 단맛을 선사합니다."}},
+    {id:"matcha-nougat",name:{zh:"抹茶御藏・牛軋糖",en:"Premium Matcha Nougat",ja:"プレミアム抹茶 最上級抹茶",ko:"최상급 말차 누가"},price:450,desc:{zh:"嚴選抹茶融入香醇牛軋糖，散發清雅茶香與微苦回甘，搭配杏仁脆粒，口感細膩且富有層次。",en:"Premium matcha blended into creamy nougat, bringing elegant tea notes with a pleasant bittersweet finish. Crunchy almond pieces add extra texture and depth.",ja:"上質な抹茶をクリーミーなヌガーに練り込み、ほろ苦く上品な茶の香りを引き出しました。サクサクとしたアーモンドを加えることで、豊かな食感と深みのある味わいがお楽しみいただけます。",ko:"엄선한 일본 말차를 넣어 은은한 차 향과 기분 좋은 쌉싸름한 여운을 담았습니다. 바삭한 아몬드가 더해져 풍부한 식감을 완성합니다."}}
+  ]},
+  {id:"crepes",ico:"🥐",name:{zh:"THÉ ROULEAU｜茶捲餅",en:"THÉ ROULEAU",ja:"THÉ ROULEAU｜ロールクッキー",ko:"THÉ ROULEAU｜크레페"},promos:[{zh:"任選3盒，贈捲餅1盒，加碼贈品牌經典編織袋乙個",en:"Buy Any 3 Boxes, Get 1 Box of Crêpes Free — Plus a Free Branded Bag",ja:"3箱お選びいただくとロールクッキー1箱を無料進呈、さらにブランドオリジナルバッグもプレゼント",ko:"3박스 선택 시 크레페 1박스 무료 증정, 브랜드 클래식 에코백까지 증정"}],items:[
+    {id:"black-tea-crepe",name:{zh:"錫蘭紅茶捲餅",en:"Black Tea Crêpes",ja:"紅茶ロールクッキー",ko:"실론 홍차 크레페"},price:300,desc:{zh:"採用錫蘭紅茶製作，茶香醇厚甘潤，搭配香酥捲餅口感，入口散發濃郁茶韻與自然麥香。",en:"Made with premium Ceylon black tea. The crispy texture delivers rich tea aroma balanced with natural wheat notes for a delightfully crisp bite.",ja:"上質なセイロン紅茶を使用し、サクサクとした食感のなかに、豊かな茶の香りと自然な小麦の風味が絶妙に調和した、軽やかで心地よい美味しさをお楽しみいただけます。",ko:"실론 홍차를 사용하여 깊고 부드러운 홍차 향을 담았습니다. 바삭한 롤 웨이퍼와 어우러져 자연스러운 밀 향이 은은하게 퍼집니다."}},
+    {id:"lemon-paozhong-crepe",name:{zh:"檸檬包種茶捲餅",en:"Lemon Paozhong Tea Crêpes",ja:"レモン包種茶ロールクッキー",ko:"레몬 포종차 크레페"},price:300,desc:{zh:"嚴選包種茶結合清新檸檬香氣，餅皮酥脆輕盈，入口散發淡雅茶韻與微酸果香，層次清爽不膩口。",en:"Premium Paozhong tea paired with refreshing lemon. Light and crispy wafer rolls reveal delicate tea notes with a hint of citrus for a clean, refreshing finish.",ja:"厳選された台湾の「包種茶」に、爽やかなレモンを合わせました。サクッと軽やかな食感のロールクッキーから、繊細なお茶の香りとほんのり広がるシトラスの風味が溶け合い、すっきりと爽やかな後味をお楽しみいただけます。",ko:"엄선한 대만 포종차와 상큼한 레몬 향을 조화롭게 담았습니다. 바삭한 롤 웨이퍼와 함께 은은한 차 향, 산뜻한 시트러스 풍미를 즐길 수 있습니다."}},
+    {id:"jinxuan-milk-crepe",name:{zh:"金萱海鹽奶蓋捲餅",en:"Creamy Salted Jinxuan Milk Tea Crêpes",ja:"金萱奶蓋ロールクッキー",ko:"진쉬안 해염 밀크폼 크레페"},price:300,desc:{zh:"金萱茶香融合濃郁鹹奶蓋風味，酥脆捲餅包裹香醇內餡，鹹甜交織、奶香滑順，口感豐富迷人。",en:"Aromatic Jinxuan tea blended with rich salted milk cream. Wrapped in a light and crispy crepe roll, it offers a harmonious balance of sweet, salty, and creamy notes.",ja:"香り高い金萱茶に、濃厚な塩ミルククリームを合わせました。サクッと軽やかなクレープロールで包み込むことで、甘み、塩気、そしてクリーミーなコクが絶妙に調和した美味しさをお楽しみいただけます。",ko:"은은한 향의 금훤차와 풍부한 솔티드 밀크 크림이 조화를 이루었습니다.가볍고 바삭한 크레페 롤 속에 담아 달콤함, 짭조름함, 부드러운 크리미한 맛의 균형을 완성했습니다."}}
+  ]},
+  {id:"milk-tea",ico:"🍵",cardType:"teaProduct",name:{zh:"THÉ TRIONE｜奶茶",en:"THÉ TRIONE",ja:"THÉ TRIONE｜ミルクティー",ko:"THÉ TRIONE｜밀크티"},promos:[{zh:"任選3盒，贈捲餅1盒，加碼贈品牌經典編織袋乙個",en:"Buy Any 3 Boxes, Get 1 Box of Crêpes Free — Plus a Free Branded Bag",ja:"3箱お選びいただくとロールクッキー1箱を無料進呈、さらにブランドオリジナルバッグもプレゼント",ko:"3박스 선택 시 크레페 1박스 무료 증정, 브랜드 클래식 에코백까지 증정"}],items:milkTeaProducts,priceMode:"box",info:{title:{zh:"風味特色",en:"Flavor Notes",ja:"風味特色",ko:"플레이버 노트"},legend:[
+    {name:{zh:"清新花香",en:"Fresh & Floral",ja:"清新花香",ko:"프레시 & 플로럴"},desc:{zh:"金萱・包種・觀音｜清新花香、淡雅回甘",en:"Jinxuan, Paozhong, Tieguanyin — fresh floral notes, light sweet finish",ja:"金萱・包種・鉄観音｜爽やかな花の香り、上品な後味",ko:"진쉬안・포종・철관음｜산뜻한 꽃향, 은은한 단맛"}},
+    {name:{zh:"奶香甜潤",en:"Milky & Sweet",ja:"奶香甜潤",ko:"밀키 & 스위트"},desc:{zh:"金萱奶茶・奶蓋｜奶香濃郁、鹹甜平衡",en:"Jinxuan milk tea, milk foam — rich milky aroma, sweet-savory balance",ja:"金萱ミルクティー・ミルクフォーム｜濃厚なミルクの香り、甘塩のバランス",ko:"진쉬안 밀크티・밀크폼｜진한 우유향, 짭짤달콤한 균형"}},
+    {name:{zh:"果香蜜韻",en:"Fruity & Honey",ja:"果香蜜韻",ko:"프루티 & 허니"},desc:{zh:"東方美人・玫瑰烏龍｜果香蜜韻、層次豐富",en:"Oriental Beauty, Rose Oolong — fruity honeyed notes, rich layers",ja:"東方美人・ローズウーロン｜果実と蜂蜜の香り、豊かな層",ko:"동방미인・로즈 우롱｜과일과 꿀 향, 풍부한 층위"}},
+    {name:{zh:"醇厚焙香",en:"Roasted & Warm",ja:"醇厚焙香",ko:"로스티드 & 웜"},desc:{zh:"紅烏龍・鐵觀音・紅玉｜焙火香氣、醇厚回甘",en:"Red Oolong, Tieguanyin, Ruby Black — roasted aroma, mellow sweet finish",ja:"紅烏龍・鉄観音・紅玉｜焙煎香、コクのある甘み",ko:"홍우롱・철관음・홍옥｜배전 향, 진한 단맛"}}
+  ]}},
+  {id:"drip",ico:"🫖",cardType:"teaProduct",name:{zh:"THÉ DRIP｜濾掛茶包",en:"THÉ DRIP",ja:"THÉ DRIP｜ドリップティー",ko:"THÉ DRIP｜드립 티백"},promos:[{zh:"濾掛茶包系列，任選10入，贈5入，贈品為限定口味請至櫃台挑選。",en:"Buy any 10 drip tea bags, Get 5 free (Limited Flavor)Selected limited flavors available at the counter.",ja:"ドリップティーバッグシリーズ10個購入で、5個プレゼント!",ko:"드립 티백 10+5 증정!한정 플레이버는 매장에서 선택!"}],items:dripTeaProducts,priceMode:"drip",info:{title:{zh:"沖泡方式",en:"Brewing Guide",ja:"抽出方法",ko:"우리는 방법"},rows:[
+    {k:{zh:"建議水量",en:"Water",ja:"湯量",ko:"물 양"},v:{zh:"180–220 ml",en:"180–220 ml",ja:"180–220 ml",ko:"180–220 ml"}},
+    {k:{zh:"建議水溫",en:"Water Temperature",ja:"湯温",ko:"물 온도"},v:{zh:"90–95°C",en:"90–95°C",ja:"90–95°C",ko:"90–95°C"}},
+    {k:{zh:"沖泡時間",en:"Brew Time",ja:"抽出時間",ko:"우림 시간"},v:{zh:"約 90 秒",en:"About 90 sec",ja:"約90秒",ko:"약 90초"}}
+  ]}}
+];
+
+let currentLang = "zh";
+let currentTab = CATS[0].id;
+let searchQuery = "";
+
+function t(value){return value?.[currentLang] ?? value?.zh ?? "";}
+function normalize(value){return String(value || "").toLocaleLowerCase().trim();}
+
+function renderTabs(){
+  const el = document.getElementById("tabs");
+  el.innerHTML = "";
+  CATS.forEach(cat=>{
+    const button = document.createElement("button");
+    button.className = "tab" + (cat.id === currentTab && !searchQuery ? " active" : "");
+    button.innerHTML = `${cat.ico} ${t(cat.name)}`;
+    button.addEventListener("click",()=>{
+      currentTab = cat.id;
+      searchQuery = "";
+      document.getElementById("searchInput").value = "";
+      render();
+    });
+    el.appendChild(button);
+  });
+}
+
+function categoryVisual(cat){
+  return `
+    <div class="category-visual" data-cat-id="${cat.id}">
+      <img alt="${t(cat.name)}" src="images/${cat.id}.jpg"
+           onload="this.style.display='block';this.parentElement.querySelector('.placeholder-ico').style.display='none';"
+           onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-ico').style.display='flex';">
+      <span class="placeholder-ico">${cat.ico}</span>
+      <div class="upload-hint">${UI[currentLang].uploadTip}</div>
+      <input type="file" accept="image/*">
+    </div>`;
+}
+
+function renderPromos(cat){
+  if(!cat.promos?.length) return "";
+  return `<div class="promo-wrap">${cat.promos.map(p=>`<div class="promo">${t(p)}</div>`).join("")}</div>`;
+}
+
+function imgBlock(item, ico){
+  return `
+    <div class="item-img" data-id="${item.id}">
+      <img alt="${t(item.name)}" src="images/${item.id}.jpg"
+           onload="this.style.display='block';this.parentElement.querySelector('.placeholder-ico').style.display='none';"
+           onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-ico').style.display='flex';">
+      <span class="placeholder-ico">${ico}</span>
+      <div class="upload-hint">${UI[currentLang].uploadTip}</div>
+      <input type="file" accept="image/*">
+    </div>`;
+}
+
+
+const CATALOG_SWATCHES = [
+  "#EACB63","#B7A982","#C6D65E","#6B4933",
+  "#8C6D4F","#A5B66A","#C79562","#6E8C70"
+];
+
+function getSecondaryText(obj){
+  if(!obj) return "";
+  if(currentLang === "zh") return "";
+  if(currentLang === "en") return obj.zh || "";
+  return obj.en || obj.zh || "";
+}
+
+function getCatalogPrice(cat,item){
+  const ui = UI[currentLang];
+
+  if(cat.cardType === "teaProduct"){
+    if(cat.priceMode === "drip"){
+      return {
+        value:item.drip,
+        label:ui.dripPrice
+      };
+    }
+    return {
+      value:item.box,
+      label:ui.boxPrice
+    };
+  }
+
+  return {
+    value:item.price,
+    label:currentLang === "zh" ? "盒" :
+          currentLang === "en" ? "Box" :
+          currentLang === "ja" ? "箱(Box)" : "박스(Box)"
+  };
+}
+
+function getCatalogMeta(cat,item){
+  const ui = UI[currentLang];
+  const parts = [];
+
+  if(item.origin) parts.push(`${ui.origin}｜${t(item.origin)}`);
+  if(item.ox) parts.push(`${ui.oxidation} ${item.ox}%${item.oxNote ? t(item.oxNote) : ""}`);
+  if(item.roast) parts.push(`${ui.roast} ${t(item.roast)}`);
+  if(item.craft) parts.push(`${ui.craft} ${t(item.craft)}`);
+  if(item.flavor) parts.push(t(item.flavor));
+
+  return parts.join(" · ");
+}
+
+function renderCatalogRow(cat,item,index){
+  const price = getCatalogPrice(cat,item);
+  const swatch = item.oxColor || CATALOG_SWATCHES[index % CATALOG_SWATCHES.length];
+  const secondaryName = getSecondaryText(item.name);
+  const secondaryDesc = getSecondaryText(item.desc);
+  const meta = getCatalogMeta(cat,item);
+
+  const addon = cat.id === "icecream"
+    ? `<div class="catalog-addon">${
+        currentLang === "zh" ? "加購價 NT$20" :
+        currentLang === "en" ? "Add-on NT$20" :
+        currentLang === "ja" ? "追加価格 NT$20" :
+        "추가 구매가 NT$20"
+      }</div>`
+    : "";
+
+  return `
+    <div class="catalog-row">
+      <div class="catalog-product">
+        <span class="catalog-swatch" style="background:${swatch}"></span>
+
+        <div class="catalog-name">
+          <div class="catalog-name-primary">${t(item.name)}${item.ihTag ? ` <span class="ih">（${UI[currentLang].ih}）</span>` : ""}</div>
+          ${secondaryName ? `<div class="catalog-name-secondary">${secondaryName}</div>` : ""}
+          ${meta ? `<div class="catalog-meta">${meta}</div>` : ""}
+        </div>
+
+        <div class="catalog-price">
+          ${price.value != null ? `<span class="price">$${price.value}</span>` : ""}
+          ${price.label ? `<div class="catalog-price-label">${price.label}</div>` : ""}
+          ${addon}
+        </div>
+      </div>
+
+      <div class="catalog-notes">
+        ${item.desc ? `<div class="catalog-desc-primary">${t(item.desc)}</div>` : ""}
+        ${secondaryDesc ? `<div class="catalog-desc-secondary">${secondaryDesc}</div>` : ""}
+      </div>
+    </div>`;
+}
+
+
+function getListPrice(cat,item){
+  const ui = UI[currentLang];
+
+  if(cat.cardType === "teaProduct"){
+    if(cat.priceMode === "drip"){
+      return { value:item.drip, label:ui.dripPrice };
+    }
+    return { value:item.box, label:ui.boxPrice };
+  }
+
+  return {
+    value:item.price,
+    label:cat.id === "icecream" ? "" :
+      (currentLang === "zh" ? "盒" :
+       currentLang === "en" ? "Box" :
+       currentLang === "ja" ? "箱" : "박스")
+  };
+}
+
+function renderProductListItem(cat,item,index){
+  const ui = UI[currentLang];
+  const price = getListPrice(cat,item);
+  const barColor = item.oxColor || CATALOG_SWATCHES[index % CATALOG_SWATCHES.length];
+
+  const specs = [];
+  if(item.ox){
+    specs.push(`<span class="product-list-spec"><b>${ui.oxidation}</b>${item.ox}%${item.oxNote ? t(item.oxNote) : ""}</span>`);
+  }
+  if(item.roast){
+    specs.push(`<span class="product-list-spec"><b>${ui.roast}</b>${t(item.roast)}</span>`);
+  }
+  if(item.craft){
+    specs.push(`<span class="product-list-spec"><b>${ui.craft}</b>${t(item.craft)}</span>`);
+  }
+
+  const addon = cat.id === "icecream"
+    ? `<div class="product-list-addon">${
+        currentLang === "zh" ? "加購價 NT$20" :
+        currentLang === "en" ? "Add-on NT$20" :
+        currentLang === "ja" ? "追加価格 NT$20" :
+        "추가 구매가 NT$20"
+      }</div>`
+    : "";
+
+  return `
+    <div class="product-list-item">
+      <span class="product-list-bar" style="background:${barColor}"></span>
+
+      <div class="product-list-main">
+        ${item.origin ? `<div class="product-list-origin">${ui.origin}｜${t(item.origin)}</div>` : ""}
+        <p class="product-list-name">
+          ${t(item.name)}
+          ${item.ihTag ? `<span class="ih">（${ui.ih}）</span>` : ""}
+        </p>
+        ${item.desc ? `<p class="product-list-desc">${t(item.desc)}</p>` : ""}
+        ${specs.length ? `<div class="product-list-specs">${specs.join("")}</div>` : ""}
+        ${item.flavor ? `<span class="product-list-flavor">${t(item.flavor)}</span>` : ""}
+      </div>
+
+      <div class="product-list-price">
+        ${price.value != null ? `<div class="price">NT$${price.value}</div>` : ""}
+        ${price.label ? `<div class="label">${price.label}</div>` : ""}
+        ${addon}
+      </div>
+    </div>`;
+}
+
+function renderProductList(cat){
+  return `
+    <div class="product-list">
+      ${cat.items.map((item,index)=>renderProductListItem(cat,item,index)).join("")}
+    </div>`;
+}
+
+
+function renderCatalog(cat){
+  const notesTitle =
+    currentLang === "zh" ? `風味特徵` :
+    currentLang === "en" ? `FLAVOR NOTES` :
+    currentLang === "ja" ? `風味特徴 <span class="en">FLAVOR NOTES</span>` :
+    `풍미 특징 <span class="en">FLAVOR NOTES</span>`;
+
+  return `
+    <div class="catalog-layout">
+      <div class="catalog-visual">
+        ${categoryVisual(cat)}
+      </div>
+
+      <div class="catalog-content">
+        ${renderPromos(cat)}
+        <div class="catalog-head">
+          <div class="catalog-head-title">${t(cat.name)}</div>
+          <div class="catalog-head-notes">${notesTitle}</div>
+        </div>
+        <div class="catalog-items">
+          ${cat.items.map((item,index)=>renderCatalogRow(cat,item,index)).join("")}
+        </div>
+      </div>
+    </div>`;
+}
+
+
+function renderTeaProductCard(cat,item){
+  const ui = UI[currentLang];
+  const isDrip = cat.priceMode === "drip";
+  const isBoxOnly = cat.priceMode === "box";
+  return `
+    <div class="item no-ox">
+      <div class="item-main">
+        <div class="item-top">
+          <p class="item-name display">${t(item.name)}</p>
+          <div class="price-pair">
+            ${isDrip ? `
+              <div class="pp"><span class="lbl">${ui.dripPrice}</span><span class="price">NT$${item.drip}</span></div>
+            ` : isBoxOnly ? `
+              <div class="pp"><span class="lbl">${ui.boxPrice}</span><span class="price">NT$${item.box}</span></div>
+            ` : `
+              <div class="pp"><span class="lbl">${ui.bagPrice}</span><span class="price">NT$${item.bag}</span></div>
+              <div class="pp"><span class="lbl">${ui.boxPrice}</span><span class="price">NT$${item.box}</span></div>
+            `}
+          </div>
+        </div>
+        ${item.desc ? `<p class="item-desc">${t(item.desc)}</p>` : ""}
+        ${item.flavor ? `<span class="flavor-tag">${t(item.flavor)}</span>` : ""}
+      </div>
+    </div>`;
+}
+
+function renderStandardCard(cat,item){
+  const ui = UI[currentLang];
+  const oxBar = item.ox ? `<div class="ox-bar" style="background:${item.oxColor}"></div>` : "";
+  const specs = [];
+  if(item.ox) specs.push(`<span class="spec"><b>${ui.oxidation}</b> ${item.ox}%${item.oxNote ? t(item.oxNote) : ""}</span>`);
+  if(item.roast) specs.push(`<span class="spec"><b>${ui.roast}</b> ${t(item.roast)}</span>`);
+  if(item.craft) specs.push(`<span class="spec"><b>${ui.craft}</b> ${t(item.craft)}</span>`);
+  return `
+    <div class="item ${item.ox ? "" : "no-ox"}">
+      ${imgBlock(item,cat.ico)}
+      ${oxBar}
+      <div class="item-main">
+        ${item.origin ? `<div class="origin-line">${ui.origin}｜${t(item.origin)}</div>` : ""}
+        <div class="item-top">
+          <p class="item-name display">${t(item.name)}${item.ihTag ? `<span class="ih">（${ui.ih}）</span>` : ""}</p>
+          ${item.price ? `<div class="price">NT$${item.price}${cat.id === "icecream" ? `<div class="addon-price">${currentLang === "zh" ? "加購價 NT$20" : currentLang === "en" ? "Add-on Price NT$20" : currentLang === "ja" ? "追加価格 NT$20" : "추가 구매가 NT$20"}</div>` : ""}</div>` : ""}
+        </div>
+        ${item.desc ? `<p class="item-desc">${t(item.desc)}</p>` : ""}
+        ${specs.length ? `<div class="spec-row">${specs.join("")}</div>` : ""}
+      </div>
+    </div>`;
+}
+
+function renderItem(cat,item){
+  return cat.cardType === "teaProduct" ? renderTeaProductCard(cat,item) : renderStandardCard(cat,item);
+}
+
+function renderInfo(cat){
+  if(!cat.info) return "";
+  let html = `<div class="info-panel"><h3 class="display">${t(cat.info.title)}</h3>`;
+  if(cat.info.rows){
+    html += cat.info.rows.map(row=>`<div class="info-row"><span class="k">${t(row.k)}</span><span class="v">${t(row.v)}</span></div>`).join("");
+  }
+  if(cat.info.legend){
+    html += `<div class="legend-grid">${cat.info.legend.map(item=>`<div class="legend-item"><div class="name">${t(item.name)}</div><div class="desc">${t(item.desc)}</div></div>`).join("")}</div>`;
+  }
+  html += `</div>`;
+  return html;
+}
+
+function getSearchText(cat,item){
+  const parts = [t(cat.name),t(item.name),t(item.desc),t(item.flavor),t(item.origin),t(item.roast),t(item.craft)];
+  return normalize(parts.join(" "));
+}
+
+function getSearchGroups(){
+  const query = normalize(searchQuery);
+  if(!query) return [];
+  return CATS.map(cat=>({cat,items:cat.items.filter(item=>getSearchText(cat,item).includes(query))})).filter(group=>group.items.length);
+}
+
+function wireCategoryVisualUploads(){
+  document.querySelectorAll(".category-visual[data-cat-id]").forEach(box=>{
+    const id = box.dataset.catId;
+    const input = box.querySelector('input[type="file"]');
+    const image = box.querySelector("img");
+    const placeholder = box.querySelector(".placeholder-ico");
+    let saved = null;
+    try{saved = localStorage.getItem("thesavor-category-img:"+id);}catch(error){console.warn(error);}
+    if(saved){
+      image.src = saved;
+      image.style.display = "block";
+      placeholder.style.display = "none";
+    }
+    box.addEventListener("click",()=>input.click());
+    input.addEventListener("click",event=>event.stopPropagation());
+    input.addEventListener("change",event=>{
+      const file = event.target.files?.[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.addEventListener("load",event=>{
+        const dataUrl = event.target.result;
+        image.src = dataUrl;
+        image.style.display = "block";
+        placeholder.style.display = "none";
+        try{localStorage.setItem("thesavor-category-img:"+id,dataUrl);}
+        catch(error){console.warn("圖片預覽已顯示，但瀏覽器儲存空間不足：",error);}
+      });
+      reader.readAsDataURL(file);
+    });
+  });
+}
+
+function wireImageUploads(){
+  document.querySelectorAll(".item-img[data-id]").forEach(box=>{
+    const id = box.dataset.id;
+    const input = box.querySelector('input[type="file"]');
+    const image = box.querySelector("img");
+    const placeholder = box.querySelector(".placeholder-ico");
+    let saved = null;
+    try{saved = localStorage.getItem("thesavor-img:"+id);}catch(error){console.warn(error);}
+    if(saved){
+      image.src = saved;
+      image.style.display = "block";
+      placeholder.style.display = "none";
+    }
+    box.addEventListener("click",()=>input.click());
+    input.addEventListener("click",event=>event.stopPropagation());
+    input.addEventListener("change",event=>{
+      const file = event.target.files?.[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.addEventListener("load",event=>{
+        const dataUrl = event.target.result;
+        image.src = dataUrl;
+        image.style.display = "block";
+        placeholder.style.display = "none";
+        try{localStorage.setItem("thesavor-img:"+id,dataUrl);}catch(error){console.warn("圖片預覽已顯示，但瀏覽器儲存空間不足，重新整理後可能不會保留：",error);}
+      });
+      reader.readAsDataURL(file);
+    });
+  });
+}
+
+function renderSearchResults(){
+  const groups = getSearchGroups();
+  if(!groups.length){
+    return `<div class="empty-state"><strong>${UI[currentLang].noResult}</strong>${UI[currentLang].noResultHint}</div>`;
+  }
+  return groups.map(({cat,items})=>`
+    <section class="search-section">
+      <div class="section-label"><h2 class="display">${cat.ico} ${t(cat.name)}</h2></div>
+      <div class="items">${items.map(item=>renderItem(cat,item)).join("")}</div>
+    </section>`).join("");
+}
+
+function render(){
+  renderTabs();
+  const main = document.getElementById("main");
+  document.getElementById("searchInput").placeholder = UI[currentLang].searchPlaceholder;
+
+  if(searchQuery){
+    main.innerHTML = `
+      <div class="section-label">
+        <h2 class="display">${UI[currentLang].searchResult}</h2>
+      </div>
+      ${renderSearchResults()}`;
+  }else{
+    const cat = CATS.find(item=>item.id === currentTab) || CATS[0];
+    main.innerHTML = `
+      <p class="upload-tip">${UI[currentLang].uploadTip}</p>
+      ${renderPromos(cat)}
+      <div class="section-label"><h2 class="display">${t(cat.name)}</h2></div>
+      ${categoryVisual(cat)}
+      ${renderProductList(cat)}
+      ${renderInfo(cat)}`;
+  }
+
+  document.getElementById("footer").textContent =
+    "PURE TEA, PURE EXPERIENCE ｜ " + UI[currentLang].footer;
+
+  wireCategoryVisualUploads();
+  wireImageUploads();
+}
+
+document.querySelectorAll(".lang-btn").forEach(button=>{
+  button.addEventListener("click",()=>{
+    document.querySelectorAll(".lang-btn").forEach(item=>item.classList.remove("active"));
+    button.classList.add("active");
+    currentLang = button.dataset.lang;
+    render();
+  });
+});
+
+document.getElementById("searchInput").addEventListener("input",event=>{
+  searchQuery = event.target.value.trim();
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
