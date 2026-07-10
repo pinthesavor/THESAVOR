@@ -238,20 +238,35 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
   margin-top:5px;
 }
 .catalog-price{
-  min-width:76px;
-  text-align:right;
-  white-space:nowrap;
+    display:flex;
+    align-items:baseline;
+    justify-content:flex-end;
+    gap:4px;
+    white-space:nowrap;
 }
+.catalog-price-wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+}
+
+.catalog-addon{
+    margin-top:6px;
+    font-size:10px;
+    color:var(--med-ox);
+    font-weight:700;
+    text-align:right;
+}
+
 .catalog-price .price{
-  display:block;
-  font-size:27px;
-  line-height:1;
-  color:#111;
+    font-size:27px;
+    line-height:1;
 }
+
 .catalog-price-label{
-  font-size:10.5px;
-  margin-top:4px;
-  color:var(--ink);
+    font-size:11px;
+    line-height:1;
+    opacity:.75;
 }
 .catalog-notes{
   border-left:1px solid rgba(19,42,29,.15);
@@ -352,10 +367,12 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
   color:var(--deep);
 }
 .product-list-price{
-  align-self:start;
-  text-align:right;
-  white-space:nowrap;
-  padding-top:2px;
+    display:flex;
+    align-items:baseline;
+    justify-content:flex-end;
+    gap:4px;
+    white-space:nowrap;
+    text-align:right;
 }
 .product-list-price .price{
   font-family:'Cormorant Garamond',serif;
@@ -364,9 +381,11 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
   color:var(--deep);
 }
 .product-list-price .label{
-  margin-top:3px;
-  font-size:10px;
-  color:rgba(26,35,28,.48);
+    display:inline;
+    margin-top:0;
+    font-size:10px;
+    line-height:1;
+    color:rgba(26,35,28,.48);
 }
 .product-list-addon{
   margin-top:4px;
@@ -376,10 +395,11 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
 }
 
 .catalog-addon{
-  font-size:10px;
-  color:var(--med-ox);
-  margin-top:4px;
-  font-weight:700;
+    margin-top:6px;
+    font-size:10px;
+    color:var(--med-ox);
+    font-weight:700;
+    text-align:right;
 }
 
 .search-section{margin-top:30px}
@@ -575,6 +595,22 @@ footer{background:var(--forest);color:var(--cream);text-align:center;padding:22p
   }
 }
 
+
+.menu-icon{
+  width:22px;
+  height:22px;
+  display:inline-block;
+  vertical-align:middle;
+  object-fit:contain;
+  margin-right:6px;
+  flex-shrink:0;
+}
+.tab{
+  gap:8px;
+}
+
+
+.upload-tip{display:none!important;}
 </style>
 </head>
 <body>
@@ -605,10 +641,10 @@ footer{background:var(--forest);color:var(--cream);text-align:center;padding:22p
 
 <script>
 const UI = {
-  zh:{unitBag:"包",unitBox:"盒",ih:"冰／熱",origin:"茶葉產地",oxidation:"發酵度",roast:"焙度",craft:"焙煎工藝",bagPrice:"茶包",boxPrice:"原葉茶",dripPrice:"濾掛包",footer:"感受台灣茶最純粹的風味",uploadTip:"正式圖片請放入 images 資料夾；點擊圖片可先在本機測試預覽",searchPlaceholder:"搜尋茶品、口味或商品介紹…",searchResult:"搜尋結果",noResult:"找不到符合的商品",noResultHint:"請嘗試其他關鍵字"},
-  en:{unitBag:"bag",unitBox:"box",ih:"Iced / Hot",origin:"Tea Origin",oxidation:"Oxidation",roast:"Roast Level",craft:"Craftsmanship",bagPrice:"Tea Bag",boxPrice:"Loose Leaf",dripPrice:"Drip Bag",footer:"Taste the purest flavor of Taiwanese tea",uploadTip:"Add real photos to the images folder; click a photo to test a local preview",searchPlaceholder:"Search tea, flavor, or description…",searchResult:"Search Results",noResult:"No matching products",noResultHint:"Try another keyword"},
-  ja:{unitBag:"包",unitBox:"箱",ih:"アイス／ホット",origin:"茶の原産地",oxidation:"発酵度",roast:"焙煎度",craft:"焙煎工芸",bagPrice:"ティーバッグ",boxPrice:"原葉茶",dripPrice:"ドリップバッグ",footer:"台湾茶の最も純粋な味わいを",uploadTip:"正式な写真は images フォルダに追加してください。クリックするとローカルでプレビューできます",searchPlaceholder:"茶名・風味・商品説明を検索…",searchResult:"検索結果",noResult:"該当する商品が見つかりません",noResultHint:"別のキーワードをお試しください"},
-  ko:{unitBag:"팩",unitBox:"박스",ih:"아이스 / 핫",origin:"차 원산지",oxidation:"발효도",roast:"배전 정도",craft:"배전 공예",bagPrice:"티백",boxPrice:"원엽차",dripPrice:"드립백",footer:"대만차의 가장 순수한 맛을 느껴보세요",uploadTip:"실제 사진은 images 폴더에 추가하세요. 클릭하면 로컬에서 미리보기 가능합니다",searchPlaceholder:"차, 풍미 또는 상품 설명 검색…",searchResult:"검색 결과",noResult:"일치하는 상품이 없습니다",noResultHint:"다른 키워드를 입력해 보세요"}
+  zh:{unitBag:"包",unitBox:"盒",ih:"冰／熱",origin:"茶葉產地",oxidation:"發酵度",roast:"焙度",craft:"焙煎工藝",caffeine:"咖啡因含量",bagPrice:"茶包",boxPrice:"原葉茶",dripPrice:"濾掛包",footer:"感受台灣茶最純粹的風味",uploadTip:"正式圖片請放入 images 資料夾；點擊圖片可先在本機測試預覽",searchPlaceholder:"搜尋茶品、口味或商品介紹…",searchResult:"搜尋結果",noResult:"找不到符合的商品",noResultHint:"請嘗試其他關鍵字"},
+  en:{unitBag:"bag",unitBox:"box",ih:"Iced / Hot",origin:"Tea Origin",caffeine:"Caffeine",oxidation:"Oxidation",roast:"Roast Level",craft:"Craftsmanship",bagPrice:"Tea Bag",boxPrice:"Loose Leaf",dripPrice:"Drip Bag",footer:"Taste the purest flavor of Taiwanese tea",uploadTip:"Add real photos to the images folder; click a photo to test a local preview",searchPlaceholder:"Search tea, flavor, or description…",searchResult:"Search Results",noResult:"No matching products",noResultHint:"Try another keyword"},
+  ja:{unitBag:"包",unitBox:"箱",ih:"アイス／ホット",origin:"茶の原産地",caffeine:"カフェイン含有量",oxidation:"発酵度",roast:"焙煎度",craft:"焙煎工芸",bagPrice:"ティーバッグ",boxPrice:"原葉茶",dripPrice:"ドリップバッグ",footer:"台湾茶の最も純粋な味わいを",uploadTip:"正式な写真は images フォルダに追加してください。クリックするとローカルでプレビューできます",searchPlaceholder:"茶名・風味・商品説明を検索…",searchResult:"検索結果",noResult:"該当する商品が見つかりません",noResultHint:"別のキーワードをお試しください"},
+  ko:{unitBag:"팩",unitBox:"박스",ih:"아이스 / 핫",origin:"차 원산지",caffeine:"카페인 함량",oxidation:"발효도",roast:"배전 정도",craft:"배전 공예",bagPrice:"티백",boxPrice:"원엽차",dripPrice:"드립백",footer:"대만차의 가장 순수한 맛을 느껴보세요",uploadTip:"실제 사진은 images 폴더에 추가하세요. 클릭하면 로컬에서 미리보기 가능합니다",searchPlaceholder:"차, 풍미 또는 상품 설명 검색…",searchResult:"검색 결과",noResult:"일치하는 상품이 없습니다",noResultHint:"다른 키워드를 입력해 보세요"}
 };
 
 const milkTeaProducts = [
@@ -622,48 +658,46 @@ const milkTeaProducts = [
 
 const dripTeaProducts = [
   {id:"jinxuan-drip",name:{zh:"阿里山金萱茶",en:"Alishan Jinxuan Tea",ja:"阿里山金萱茶",ko:"알리산 진쉬안차"},drip:55,flavor:{zh:"淡奶香・果香",en:"Light Milk & Fruit",ja:"淡いミルク香・果実香",ko:"은은한 밀키 향・과일 향"},desc:{zh:"阿里山金萱茶香清雅，帶自然淡奶香與細緻果香，茶湯柔順甘甜。",en:"Alishan Jinxuan offers a refined aroma with naturally light milky and fruity notes, finishing smooth and sweet.",ja:"阿里山金萱の上品な香り。自然な淡いミルク香と果実香が広がり、なめらかで甘みのある味わい。",ko:"알리산 진쉬안의 우아한 향과 자연스러운 은은한 밀키 향, 과일 향이 어우러져 부드럽고 달콤합니다."}},
-  {id:"oriental-beauty-drip",name:{zh:"東方美人茶",en:"Oriental Beauty Tea",ja:"東方美人茶",ko:"동방미인차"},drip:60,flavor:{zh:"花蜜香・蜂蜜香",en:"Floral Honey & Honeyed",ja:"花蜜香・蜂蜜香",ko:"꽃꿀 향・꿀 향"},desc:{zh:"天然熟果與蜂蜜香氣層層展開，茶湯柔順甜潤，尾韻細緻。",en:"Natural ripe-fruit and honeyed aromas unfold in layers, with a smooth liquor and delicate finish.",ja:"熟した果実と蜂蜜を思わせる香りが幾層にも広がり、なめらかで繊細な余韻。",ko:"잘 익은 과일과 꿀을 닮은 향이 겹겹이 펼쳐지고 부드럽고 섬세한 여운이 이어집니다."}},
+  {id:"oriental-beauty-drip",name:{zh:"東方美人茶",en:"Oriental Beauty Tea",ja:"東方美人茶",ko:"동방미인차"},drip:65,flavor:{zh:"花蜜香・蜂蜜香",en:"Floral Honey & Honeyed",ja:"花蜜香・蜂蜜香",ko:"꽃꿀 향・꿀 향"},desc:{zh:"天然熟果與蜂蜜香氣層層展開，茶湯柔順甜潤，尾韻細緻。",en:"Natural ripe-fruit and honeyed aromas unfold in layers, with a smooth liquor and delicate finish.",ja:"熟した果実と蜂蜜を思わせる香りが幾層にも広がり、なめらかで繊細な余韻。",ko:"잘 익은 과일과 꿀을 닮은 향이 겹겹이 펼쳐지고 부드럽고 섬세한 여운이 이어집니다."}},
   {id:"yuchi-ruby-drip",name:{zh:"魚池紅玉紅茶",en:"Yuchi Ruby Black Tea",ja:"魚池紅玉紅茶",ko:"위츠 홍옥 홍차"},drip:55,flavor:{zh:"薄荷・肉桂",en:"Mint & Cinnamon",ja:"ミント・シナモン",ko:"민트・시나몬"},desc:{zh:"台灣紅玉特有的薄荷與肉桂氣息鮮明，茶感飽滿，帶清爽辛香。",en:"Taiwan Ruby black tea reveals signature mint and cinnamon notes with a full body and refreshing spice.",ja:"台湾紅玉ならではのミントとシナモンの香り。厚みのある味わいに爽やかなスパイス感。",ko:"대만 홍옥 특유의 민트와 시나몬 향이 선명하며 풍부한 바디감과 산뜻한 스파이스 여운이 특징입니다."}},
   {id:"rose-oolong-drip",name:{zh:"玫瑰烏龍茶",en:"Rose Oolong Tea",ja:"ローズ烏龍茶",ko:"로즈 우롱차"},drip:55,flavor:{zh:"淡花香・清甜",en:"Delicate Floral & Sweet",ja:"淡い花香・清らかな甘み",ko:"은은한 꽃향・깔끔한 단맛"},desc:{zh:"清雅玫瑰花香與烏龍茶韻相互融合，香氣明亮，入口柔和清甜。",en:"Elegant rose aromatics meet smooth oolong character for a bright, gentle, lightly sweet cup.",ja:"上品なバラの香りとウーロン茶の風味が調和し、華やかでやさしい甘み。",ko:"우아한 장미 향과 우롱차의 풍미가 조화를 이루며 화사하고 부드러운 단맛을 냅니다."}},
   {id:"pinglin-tieguanyin-drip",name:{zh:"坪林鐵觀音茶",en:"Pinglin Tieguanyin Tea",ja:"坪林鉄観音茶",ko:"핑린 철관음차"},drip:70,flavor:{zh:"熟果香・熟火香",en:"Ripe Fruit & Roasted",ja:"熟果香・焙煎香",ko:"숙성 과일 향・구수한 로스팅 향"},desc:{zh:"中重焙火帶出熟果與烘焙香氣，茶湯醇厚，回甘綿長。",en:"Medium-heavy roasting brings out ripe-fruit and toasted notes, with a mellow body and long sweet finish.",ja:"中強焙煎が熟した果実と焙煎香を引き出し、コクのある味わいと長い甘み。",ko:"중강배전으로 숙성 과일과 구수한 향이 살아나며 진하고 긴 단맛이 이어집니다."}},
   {id:"taitung-red-oolong-drip",name:{zh:"台東紅烏龍茶",en:"Taitung Red Oolong Tea",ja:"台東紅烏龍茶",ko:"타이둥 홍우롱차"},drip:70,flavor:{zh:"熟果香・蔗糖香",en:"Ripe Fruit & Cane Sugar",ja:"熟果香・サトウキビ香",ko:"열대과일 향・흑설탕 향"},desc:{zh:"重發酵與焙火交織出成熟果香與蔗糖甜香，口感厚實、尾韻深長。",en:"Heavy oxidation and roast create ripe-fruit and cane-sugar sweetness with a deep, full-bodied finish.",ja:"重発酵と焙煎が熟した果実とサトウキビの甘い香りを引き出し、深く厚みのある味わい。",ko:"강한 발효와 배전이 잘 익은 과일과 흑설탕 같은 단향을 만들어 깊고 묵직한 맛을 냅니다."}}
 ];
 
-const CATS = [
-  {id:"latte",ico:"🧋",name:{zh:"THÉ LATTE｜茶歐蕾",en:"THÉ LATTE",ja:"THÉ LATTE｜茶ラテ",ko:"THÉ LATTE｜티 라떼"},promos:[{zh:"※自備環保杯－10元",en:"Bring Your Own Cup & Save NT$10",ja:"マイカップ持参で10元引き",ko:"개인 컵 지참 시 10元 할인"},{zh:"購買茶歐蕾乙杯，即贈紅茶捲餅乙份",en:"Buy a Tea Latte, Get a Free Black Tea Crêpe",ja:"茶ラテを1杯ご購入で、紅茶ロールクッキーを1つプレゼント",ko:"티 라떼 한 잔 구매 시 홍차 크레페 1개 증정"}],items:[
-    {id:"jinxuan-latte",name:{zh:"阿里山金萱茶歐蕾",en:"Alishan Jinxuan Tea Latte",ja:"阿里山金萱ティーオレ",ko:"알리산 진쉬안차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:180,ihTag:true,ox:25,oxColor:"var(--light-ox)",roast:{zh:"烘乾（未焙火）",en:"Unroasted",ja:"乾燥（無焙煎）",ko:"건조(비배전)"},desc:{zh:"柔和金萱奶香與鮮奶融合，茶韻清甜，口感滑順。",en:"Soft Jinxuan milk notes blend with fresh milk for a smooth, lightly sweet finish.",ja:"金萱のやわらかなミルク香とミルクが溶け合う、なめらかな味わい。",ko:"진쉬안의 부드러운 우유 향과 신선한 우유가 어우러진 매끄러운 맛."}},
-    {id:"tieguanyin-latte",name:{zh:"坪林鐵觀音茶歐蕾",en:"Pinglin Tieguanyin Tea Latte",ja:"坪林鉄観音ティーオレ",ko:"핑린 철관음차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:180,ihTag:true,ox:35,oxColor:"var(--med-ox)",roast:{zh:"7分火（中重焙）",en:"Medium-Heavy Roast",ja:"七分焙煎（中強焙煎）",ko:"7부 배전(중강배전)"},desc:{zh:"焙火香氣沉穩，與奶香平衡融合，呈現成熟濃郁的茶歐蕾風味。",en:"Deep roasted tea character meets milk in a balanced, rich, and mature latte.",ja:"落ち着いた焙煎香とミルクが調和した、深みのあるティーラテ。",ko:"깊은 배전 향과 우유가 균형 있게 어우러진 진한 티 라떼."}},
-    {id:"red-oolong-latte",name:{zh:"台東紅烏龍茶歐蕾",en:"Taitung Red Oolong Tea Latte",ja:"台東紅烏龍ティーオレ",ko:"타이둥 홍우롱차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:180,ihTag:true,ox:80,oxColor:"var(--heavy-ox)",oxNote:{zh:"（重發酵）",en:" (Heavy Oxidation)",ja:"（重発酵）",ko:" (중발효)"},roast:{zh:"重烘焙",en:"Heavy Roast",ja:"深煎り（強焙煎）",ko:"깊은 로스팅(강배전)"},desc:{zh:"熟果、焦糖與木質茶韻濃郁飽滿，加入鮮奶後更顯圓潤厚實。",en:"Ripe fruit, caramel, and woody notes become even rounder and fuller with milk.",ja:"熟した果実、キャラメル、木質香がミルクでさらにまろやかに。",ko:"잘 익은 과일, 캐러멜, 우디 향이 우유와 만나 더욱 둥글고 풍부해집니다."}},
-    {id:"uji-matcha-latte",name:{zh:"日本宇治抹茶歐蕾",en:"Uji Matcha Latte",ja:"宇治抹茶ティーオレ",ko:"우지 말차 오레"},origin:{zh:"日本",en:"Japan",ja:"日本",ko:"일본"},price:250,ihTag:true,craft:{zh:"最佳品質荒茶",en:"Premium Quality Raw Tea",ja:"最高品質の荒茶",ko:"최고 품질의 아라차(荒茶)"},desc:{zh:"嚴選宇治抹茶，茶感濃厚鮮明，微苦回甘與奶香形成細緻平衡。",en:"Selected Uji matcha offers vivid tea depth, balancing gentle bitterness, sweetness, and milk.",ja:"宇治抹茶の濃厚な旨味とほろ苦さ、ミルクの甘みが繊細に調和。",ko:"우지 말차의 선명한 깊이와 은은한 쌉싸름함, 우유의 단맛이 섬세하게 조화를 이룹니다."}}
-  ]},
-  {id:"icecream",ico:"🧊",name:{zh:"THÉ ICE CREAM BAR｜台灣茶雪糕",en:"THÉ ICE CREAM BAR",ja:"THÉ ICE CREAM BAR｜茶アイスバー",ko:"THÉ ICE CREAM BAR｜티 아이스크림"},items:[
-    {id:"jinxuan-icecream",name:{zh:"阿里山金萱茶雪糕",en:"Alishan Jinxuan Tea Ice Cream Bar",ja:"阿里山金萱茶アイスバー",ko:"알리산 진쉬안차 아이스크림"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:60,desc:{zh:"金萱清甜茶香與奶香交融，入口清爽細緻。",en:"Fresh Jinxuan tea and milk notes blend into a clean, delicate frozen treat.",ja:"金萱の清らかな甘みとミルク香が溶け合う繊細な味。",ko:"진쉬안의 맑은 단맛과 우유 향이 어우러진 섬세한 아이스 바."}},
-    {id:"tieguanyin-icecream",name:{zh:"坪林鐵觀音茶雪糕",en:"Pinglin Tieguanyin Ice Cream Bar",ja:"坪林鉄観音茶アイスバー",ko:"핑린 철관음차 아이스크림"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:49,desc:{zh:"溫暖焙火與奶香交疊，風味濃郁卻不厚重。",en:"Warm roast notes layer with milk for a rich yet balanced bar.",ja:"温かな焙煎香とミルクが重なる、濃厚で軽やかな味わい。",ko:"따뜻한 배전 향과 우유 향이 겹쳐 진하지만 무겁지 않은 풍미."}},
-    {id:"red-oolong-icecream",name:{zh:"台東紅烏龍茶雪糕",en:"Taitung Red Oolong Ice Cream Bar",ja:"台東紅烏龍茶アイスバー",ko:"타이둥 홍우롱차 아이스크림"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:49,desc:{zh:"熟果與焙火茶韻鮮明，冰涼入口仍保有厚實回甘。",en:"Ripe fruit and roasted tea notes stay full and lingering even when frozen.",ja:"熟した果実と焙煎香が鮮明で、冷たい口どけの後にも深い甘み。",ko:"잘 익은 과일과 배전 향이 선명하며 차갑게 즐겨도 깊은 단맛이 남습니다."}},
-    {id:"vanilla-icecream",name:{zh:"香草牛奶雪糕",en:"Vanilla Milk Ice Cream Bar",ja:"バニラミルクアイスバー",ko:"바닐라 밀크 아이스크림"},price:49,desc:{zh:"香草與牛奶的經典組合，柔滑香甜，簡單耐吃。",en:"A timeless vanilla-and-milk pairing with a smooth, mellow sweetness.",ja:"バニラとミルクの王道コンビ。なめらかでやさしい甘さ。",ko:"바닐라와 우유의 클래식한 조합, 부드럽고 편안한 단맛."}}
-  ]},
-  {id:"nougat",ico:"🍬",name:{zh:"THÉ NOUGAT｜茶牛軋糖",en:"THÉ NOUGAT",ja:"THÉ NOUGAT｜ヌガー",ko:"THÉ NOUGAT｜누가"},promos:[{zh:"任選3盒，贈捲餅1盒，加碼贈品牌經典編織袋乙個",en:"Buy Any 3 Boxes, Get 1 Box of Crêpes Free — Plus a Free Branded Bag",ja:"3箱お選びいただくとロールクッキー1箱を無料進呈、さらにブランドオリジナルバッグもプレゼント",ko:"3박스 선택 시 크레페 1박스 무료 증정, 브랜드 클래식 에코백까지 증정"}],items:[
+const CATS = [{id:"nougat",ico:'<img src="images/icon_nougat.svg" class="menu-icon" alt="">',name:{zh:"THÉ NOUGAT｜茶牛軋糖",en:"THÉ NOUGAT",ja:"THÉ NOUGAT｜ヌガー",ko:"THÉ NOUGAT｜누가"},promos:[{zh:"任選3盒，贈捲餅1盒，加碼贈品牌經典編織袋乙個",en:"Buy Any 3 Boxes, Get 1 Box of Crêpes Free — Plus a Free Branded Bag",ja:"3箱お選びいただくとロールクッキー1箱を無料進呈、さらにブランドオリジナルバッグもプレゼント",ko:"3박스 선택 시 크레페 1박스 무료 증정, 브랜드 클래식 에코백까지 증정"}],items:[
     {id:"original-nougat",name:{zh:"經典原味・牛軋糖",en:"Original Flavor Nougat",ja:"プレーン クラシックオリジナル",ko:"클래식 오리지널 누가"},price:300,desc:{zh:"香濃牛奶熬製而成，加入飽滿杏仁果粒，口感Q彈不黏牙，奶香濃郁中帶有堅果酥脆層次。",en:"Made with premium milk and generously filled with crunchy almond. Soft, chewy, and non-sticky, delivering a rich milky flavor with delightful nutty crunch.",ja:"濃厚なミルクに、香ばしいアーモンドをたっぷり加えました。もちもちで歯にくっつかず、ミルクのコクとナッツのサクサク感が楽しめます。",ko:"진하게 끓여낸 우유로 만든 누가에 통아몬드를 듬뿍 넣었습니다. 쫀득하면서도 이에 달라붙지 않는 식감과 진한 우유 풍미, 바삭한 아몬드의 조화가 매력적입니다."}},
     {id:"amber-oolong-nougat",name:{zh:"琥珀烏龍青・牛軋糖",en:"Amber Oolong Green Tea Nougat",ja:"コハクウーロン茶 アンバーウーロングリーン",ko:"앰버 우롱 그린티 누가"},price:350,desc:{zh:"嚴選琥珀烏龍茶入料，茶香醇厚帶有淡雅焙香，融合香濃牛奶與杏仁果粒，口感Q彈不黏牙，茶韻回甘悠長。",en:"Made with premium Taiwanese Amber Oolong, offering a rich tea aroma with subtle roasted notes. Blended with milk and crunchy almonds for a soft, chewy texture and a lingering sweet tea finish.",ja:"厳選された台湾の「琥珀烏龍茶」を使用し、ほのかな焙煎香が漂う豊かな茶の香りを引き出しました。まろやかなミルク、そしてサクサクとしたアーモンドを組み合わせることで、もちもちとした柔らかな食感と、心地よく続くお茶の甘い余韻をお楽しみいただけます。",ko:"엄선한 대만 호박 우롱차를 사용하여 깊은 차 향과 은은한 볶은 향을 담았습니다. 진한 우유와 아몬드가 어우러져 쫀득한 식감과 긴 여운의 단맛을 선사합니다."}},
     {id:"matcha-nougat",name:{zh:"抹茶御藏・牛軋糖",en:"Premium Matcha Nougat",ja:"プレミアム抹茶 最上級抹茶",ko:"최상급 말차 누가"},price:450,desc:{zh:"嚴選抹茶融入香醇牛軋糖，散發清雅茶香與微苦回甘，搭配杏仁脆粒，口感細膩且富有層次。",en:"Premium matcha blended into creamy nougat, bringing elegant tea notes with a pleasant bittersweet finish. Crunchy almond pieces add extra texture and depth.",ja:"上質な抹茶をクリーミーなヌガーに練り込み、ほろ苦く上品な茶の香りを引き出しました。サクサクとしたアーモンドを加えることで、豊かな食感と深みのある味わいがお楽しみいただけます。",ko:"엄선한 일본 말차를 넣어 은은한 차 향과 기분 좋은 쌉싸름한 여운을 담았습니다. 바삭한 아몬드가 더해져 풍부한 식감을 완성합니다."}}
   ]},
-  {id:"crepes",ico:"🥐",name:{zh:"THÉ ROULEAU｜茶捲餅",en:"THÉ ROULEAU",ja:"THÉ ROULEAU｜ロールクッキー",ko:"THÉ ROULEAU｜크레페"},promos:[{zh:"任選3盒，贈捲餅1盒，加碼贈品牌經典編織袋乙個",en:"Buy Any 3 Boxes, Get 1 Box of Crêpes Free — Plus a Free Branded Bag",ja:"3箱お選びいただくとロールクッキー1箱を無料進呈、さらにブランドオリジナルバッグもプレゼント",ko:"3박스 선택 시 크레페 1박스 무료 증정, 브랜드 클래식 에코백까지 증정"}],items:[
+  {id:"crepes",ico:'<img src="images/icon_crepe.svg" class="menu-icon" alt="">',name:{zh:"THÉ ROULEAU｜茶捲餅",en:"THÉ ROULEAU",ja:"THÉ ROULEAU｜ロールクッキー",ko:"THÉ ROULEAU｜크레페"},promos:[{zh:"任選3盒，贈捲餅1盒，加碼贈品牌經典編織袋乙個",en:"Buy Any 3 Boxes, Get 1 Box of Crêpes Free — Plus a Free Branded Bag",ja:"3箱お選びいただくとロールクッキー1箱を無料進呈、さらにブランドオリジナルバッグもプレゼント",ko:"3박스 선택 시 크레페 1박스 무료 증정, 브랜드 클래식 에코백까지 증정"}],items:[
     {id:"black-tea-crepe",name:{zh:"錫蘭紅茶捲餅",en:"Black Tea Crêpes",ja:"紅茶ロールクッキー",ko:"실론 홍차 크레페"},price:300,desc:{zh:"採用錫蘭紅茶製作，茶香醇厚甘潤，搭配香酥捲餅口感，入口散發濃郁茶韻與自然麥香。",en:"Made with premium Ceylon black tea. The crispy texture delivers rich tea aroma balanced with natural wheat notes for a delightfully crisp bite.",ja:"上質なセイロン紅茶を使用し、サクサクとした食感のなかに、豊かな茶の香りと自然な小麦の風味が絶妙に調和した、軽やかで心地よい美味しさをお楽しみいただけます。",ko:"실론 홍차를 사용하여 깊고 부드러운 홍차 향을 담았습니다. 바삭한 롤 웨이퍼와 어우러져 자연스러운 밀 향이 은은하게 퍼집니다."}},
     {id:"lemon-paozhong-crepe",name:{zh:"檸檬包種茶捲餅",en:"Lemon Paozhong Tea Crêpes",ja:"レモン包種茶ロールクッキー",ko:"레몬 포종차 크레페"},price:300,desc:{zh:"嚴選包種茶結合清新檸檬香氣，餅皮酥脆輕盈，入口散發淡雅茶韻與微酸果香，層次清爽不膩口。",en:"Premium Paozhong tea paired with refreshing lemon. Light and crispy wafer rolls reveal delicate tea notes with a hint of citrus for a clean, refreshing finish.",ja:"厳選された台湾の「包種茶」に、爽やかなレモンを合わせました。サクッと軽やかな食感のロールクッキーから、繊細なお茶の香りとほんのり広がるシトラスの風味が溶け合い、すっきりと爽やかな後味をお楽しみいただけます。",ko:"엄선한 대만 포종차와 상큼한 레몬 향을 조화롭게 담았습니다. 바삭한 롤 웨이퍼와 함께 은은한 차 향, 산뜻한 시트러스 풍미를 즐길 수 있습니다."}},
     {id:"jinxuan-milk-crepe",name:{zh:"金萱海鹽奶蓋捲餅",en:"Creamy Salted Jinxuan Milk Tea Crêpes",ja:"金萱奶蓋ロールクッキー",ko:"진쉬안 해염 밀크폼 크레페"},price:300,desc:{zh:"金萱茶香融合濃郁鹹奶蓋風味，酥脆捲餅包裹香醇內餡，鹹甜交織、奶香滑順，口感豐富迷人。",en:"Aromatic Jinxuan tea blended with rich salted milk cream. Wrapped in a light and crispy crepe roll, it offers a harmonious balance of sweet, salty, and creamy notes.",ja:"香り高い金萱茶に、濃厚な塩ミルククリームを合わせました。サクッと軽やかなクレープロールで包み込むことで、甘み、塩気、そしてクリーミーなコクが絶妙に調和した美味しさをお楽しみいただけます。",ko:"은은한 향의 금훤차와 풍부한 솔티드 밀크 크림이 조화를 이루었습니다.가볍고 바삭한 크레페 롤 속에 담아 달콤함, 짭조름함, 부드러운 크리미한 맛의 균형을 완성했습니다."}}
   ]},
-  {id:"milk-tea",ico:"🍵",cardType:"teaProduct",name:{zh:"THÉ TRIONE｜奶茶",en:"THÉ TRIONE",ja:"THÉ TRIONE｜ミルクティー",ko:"THÉ TRIONE｜밀크티"},promos:[{zh:"任選3盒，贈捲餅1盒，加碼贈品牌經典編織袋乙個",en:"Buy Any 3 Boxes, Get 1 Box of Crêpes Free — Plus a Free Branded Bag",ja:"3箱お選びいただくとロールクッキー1箱を無料進呈、さらにブランドオリジナルバッグもプレゼント",ko:"3박스 선택 시 크레페 1박스 무료 증정, 브랜드 클래식 에코백까지 증정"}],items:milkTeaProducts,priceMode:"box",info:{title:{zh:"風味特色",en:"Flavor Notes",ja:"風味特色",ko:"플레이버 노트"},legend:[
+  {id:"milk-tea",ico:'<img src="images/icon_milktea.svg" class="menu-icon" alt="">',cardType:"teaProduct",name:{zh:"THÉ TRIONE｜奶茶",en:"THÉ TRIONE",ja:"THÉ TRIONE｜ミルクティー",ko:"THÉ TRIONE｜밀크티"},promos:[{zh:"任選3盒，贈捲餅1盒，加碼贈品牌經典編織袋乙個",en:"Buy Any 3 Boxes, Get 1 Box of Crêpes Free — Plus a Free Branded Bag",ja:"3箱お選びいただくとロールクッキー1箱を無料進呈、さらにブランドオリジナルバッグもプレゼント",ko:"3박스 선택 시 크레페 1박스 무료 증정, 브랜드 클래식 에코백까지 증정"}],items:milkTeaProducts,priceMode:"box",info:{title:{zh:"風味特色",en:"Flavor Notes",ja:"風味特色",ko:"플레이버 노트"},legend:[
     {name:{zh:"清新花香",en:"Fresh & Floral",ja:"清新花香",ko:"프레시 & 플로럴"},desc:{zh:"金萱・包種・觀音｜清新花香、淡雅回甘",en:"Jinxuan, Paozhong, Tieguanyin — fresh floral notes, light sweet finish",ja:"金萱・包種・鉄観音｜爽やかな花の香り、上品な後味",ko:"진쉬안・포종・철관음｜산뜻한 꽃향, 은은한 단맛"}},
     {name:{zh:"奶香甜潤",en:"Milky & Sweet",ja:"奶香甜潤",ko:"밀키 & 스위트"},desc:{zh:"金萱奶茶・奶蓋｜奶香濃郁、鹹甜平衡",en:"Jinxuan milk tea, milk foam — rich milky aroma, sweet-savory balance",ja:"金萱ミルクティー・ミルクフォーム｜濃厚なミルクの香り、甘塩のバランス",ko:"진쉬안 밀크티・밀크폼｜진한 우유향, 짭짤달콤한 균형"}},
     {name:{zh:"果香蜜韻",en:"Fruity & Honey",ja:"果香蜜韻",ko:"프루티 & 허니"},desc:{zh:"東方美人・玫瑰烏龍｜果香蜜韻、層次豐富",en:"Oriental Beauty, Rose Oolong — fruity honeyed notes, rich layers",ja:"東方美人・ローズウーロン｜果実と蜂蜜の香り、豊かな層",ko:"동방미인・로즈 우롱｜과일과 꿀 향, 풍부한 층위"}},
     {name:{zh:"醇厚焙香",en:"Roasted & Warm",ja:"醇厚焙香",ko:"로스티드 & 웜"},desc:{zh:"紅烏龍・鐵觀音・紅玉｜焙火香氣、醇厚回甘",en:"Red Oolong, Tieguanyin, Ruby Black — roasted aroma, mellow sweet finish",ja:"紅烏龍・鉄観音・紅玉｜焙煎香、コクのある甘み",ko:"홍우롱・철관음・홍옥｜배전 향, 진한 단맛"}}
   ]}},
-  {id:"drip",ico:"🫖",cardType:"teaProduct",name:{zh:"THÉ DRIP｜濾掛茶包",en:"THÉ DRIP",ja:"THÉ DRIP｜ドリップティー",ko:"THÉ DRIP｜드립 티백"},promos:[{zh:"濾掛茶包系列，任選10入，贈5入，贈品為限定口味請至櫃台挑選。",en:"Buy any 10 drip tea bags, Get 5 free (Limited Flavor)Selected limited flavors available at the counter.",ja:"ドリップティーバッグシリーズ10個購入で、5個プレゼント!",ko:"드립 티백 10+5 증정!한정 플레이버는 매장에서 선택!"}],items:dripTeaProducts,priceMode:"drip",info:{title:{zh:"沖泡方式",en:"Brewing Guide",ja:"抽出方法",ko:"우리는 방법"},rows:[
+  {id:"drip",ico:'<img src="images/icon_drip.svg" class="menu-icon" alt="">',cardType:"teaProduct",name:{zh:"THÉ DRIP｜濾掛茶包",en:"THÉ DRIP",ja:"THÉ DRIP｜ドリップティー",ko:"THÉ DRIP｜드립 티백"},promos:[{zh:"濾掛茶包系列，任選10入，贈5入，贈品為限定口味請至櫃台挑選。",en:"Buy any 10 drip tea bags, Get 5 free (Limited Flavor)Selected limited flavors available at the counter.",ja:"ドリップティーバッグシリーズ10個購入で、5個プレゼント!",ko:"드립 티백 10+5 증정!한정 플레이버는 매장에서 선택!"}],items:dripTeaProducts,priceMode:"drip",info:{title:{zh:"沖泡方式",en:"Brewing Guide",ja:"抽出方法",ko:"우리는 방법"},rows:[
     {k:{zh:"建議水量",en:"Water",ja:"湯量",ko:"물 양"},v:{zh:"180–220 ml",en:"180–220 ml",ja:"180–220 ml",ko:"180–220 ml"}},
     {k:{zh:"建議水溫",en:"Water Temperature",ja:"湯温",ko:"물 온도"},v:{zh:"90–95°C",en:"90–95°C",ja:"90–95°C",ko:"90–95°C"}},
     {k:{zh:"沖泡時間",en:"Brew Time",ja:"抽出時間",ko:"우림 시간"},v:{zh:"約 90 秒",en:"About 90 sec",ja:"約90秒",ko:"약 90초"}}
-  ]}}
-];
+  ]}},
+  {id:"latte",ico:'<img src="images/icon_latte.svg" class="menu-icon" alt="">',name:{zh:"THÉ LATTE｜茶歐蕾",en:"THÉ LATTE",ja:"THÉ LATTE｜茶ラテ",ko:"THÉ LATTE｜티 라떼"},promos:[{zh:"※自備環保杯－10元",en:"Bring Your Own Cup & Save NT$10",ja:"マイカップ持参で10元引き",ko:"개인 컵 지참 시 10元 할인"},{zh:"購買茶歐蕾乙杯，即贈紅茶捲餅乙份",en:"Buy a Tea Latte, Get a Free Black Tea Crêpe",ja:"茶ラテを1杯ご購入で、紅茶ロールクッキーを1つプレゼント",ko:"티 라떼 한 잔 구매 시 홍차 크레페 1개 증정"}],items:[
+    {id:"jinxuan-latte",name:{zh:"阿里山金萱茶歐蕾",en:"Alishan Jinxuan Tea Latte",ja:"阿里山金萱ティーオレ",ko:"알리산 진쉬안차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"111.5 mg",price:180,ihTag:true,ox:25,oxColor:"var(--light-ox)",roast:{zh:"烘乾（未焙火）",en:"Unroasted",ja:"乾燥（無焙煎）",ko:"건조(비배전)"},desc:{zh:"柔和金萱奶香與鮮奶融合，茶韻清甜，口感滑順。",en:"Soft Jinxuan milk notes blend with fresh milk for a smooth, lightly sweet finish.",ja:"金萱のやわらかなミルク香とミルクが溶け合う、なめらかな味わい。",ko:"진쉬안의 부드러운 우유 향과 신선한 우유가 어우러진 매끄러운 맛."}},
+    {id:"tieguanyin-latte",name:{zh:"坪林鐵觀音茶歐蕾",en:"Pinglin Tieguanyin Tea Latte",ja:"坪林鉄観音ティーオレ",ko:"핑린 철관음차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"111.5 mg",price:180,ihTag:true,ox:35,oxColor:"var(--med-ox)",roast:{zh:"7分火（中重焙）",en:"Medium-Heavy Roast",ja:"七分焙煎（中強焙煎）",ko:"7부 배전(중강배전)"},desc:{zh:"焙火香氣沉穩，與奶香平衡融合，呈現成熟濃郁的茶歐蕾風味。",en:"Deep roasted tea character meets milk in a balanced, rich, and mature latte.",ja:"落ち着いた焙煎香とミルクが調和した、深みのあるティーラテ。",ko:"깊은 배전 향과 우유가 균형 있게 어우러진 진한 티 라떼."}},
+    {id:"red-oolong-latte",name:{zh:"台東紅烏龍茶歐蕾",en:"Taitung Red Oolong Tea Latte",ja:"台東紅烏龍ティーオレ",ko:"타이둥 홍우롱차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"111.5 mg",price:180,ihTag:true,ox:80,oxColor:"var(--heavy-ox)",oxNote:{zh:"（重發酵）",en:" (Heavy Oxidation)",ja:"（重発酵）",ko:" (중발효)"},roast:{zh:"重烘焙",en:"Heavy Roast",ja:"深煎り（強焙煎）",ko:"깊은 로스팅(강배전)"},desc:{zh:"熟果、焦糖與木質茶韻濃郁飽滿，加入鮮奶後更顯圓潤厚實。",en:"Ripe fruit, caramel, and woody notes become even rounder and fuller with milk.",ja:"熟した果実、キャラメル、木質香がミルクでさらにまろやかに。",ko:"잘 익은 과일, 캐러멜, 우디 향이 우유와 만나 더욱 둥글고 풍부해집니다."}},
+{id:"uji-matcha-latte",name:{zh:"日本宇治抹茶歐蕾",en:"Uji Matcha Latte",ja:"宇治抹茶ティーオレ",ko:"우지 말차 오레"},origin:{zh:"日本",en:"Japan",ja:"日本",ko:"일본"},caffeine:"139.4 mg",price:250,ihTag:true,oxColor:"#354f2f",craft:{zh:"最佳品質荒茶",en:"Premium Quality Raw Tea",ja:"最高品質の荒茶",ko:"최고 품질의 아라차(荒茶)"},desc:{zh:"嚴選宇治抹茶，茶感濃厚鮮明，微苦回甘與奶香形成細緻平衡。",en:"Selected Uji matcha offers vivid tea depth, balancing gentle bitterness, sweetness, and milk.",ja:"宇治抹茶の濃厚な旨味とほろ苦さ、ミルクの甘みが繊細に調和。",ko:"우지 말차의 선명한 깊이와 은은한 쌉싸름함, 우유의 단맛이 섬세하게 조화를 이룹니다."}}
+  ]},
+  {id:"icecream",ico:'<img src="images/icon_icecream.svg" class="menu-icon" alt="">',name:{zh:"THÉ ICE CREAM BAR｜台灣茶雪糕",en:"THÉ ICE CREAM BAR",ja:"THÉ ICE CREAM BAR｜茶アイスバー",ko:"THÉ ICE CREAM BAR｜티 아이스크림"},items:[
+    {id:"jinxuan-icecream",name:{zh:"阿里山金萱茶雪糕",en:"Alishan Jinxuan Tea Ice Cream Bar",ja:"阿里山金萱茶アイスバー",ko:"알리산 진쉬안차 아이스크림"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"24.45 mg",price:49,desc:{zh:"金萱清甜茶香與奶香交融，入口清爽細緻。",en:"Fresh Jinxuan tea and milk notes blend into a clean, delicate frozen treat.",ja:"金萱の清らかな甘みとミルク香が溶け合う繊細な味。",ko:"진쉬안의 맑은 단맛과 우유 향이 어우러진 섬세한 아이스 바."}},
+    {id:"tieguanyin-icecream",name:{zh:"坪林鐵觀音茶雪糕",en:"Pinglin Tieguanyin Ice Cream Bar",ja:"坪林鉄観音茶アイスバー",ko:"핑린 철관음차 아이스크림"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"27.87 mg",price:49,desc:{zh:"溫暖焙火與奶香交疊，風味濃郁卻不厚重。",en:"Warm roast notes layer with milk for a rich yet balanced bar.",ja:"温かな焙煎香とミルクが重なる、濃厚で軽やかな味わい。",ko:"따뜻한 배전 향과 우유 향이 겹쳐 진하지만 무겁지 않은 풍미."}},
+    {id:"red-oolong-icecream",name:{zh:"台東紅烏龍茶雪糕",en:"Taitung Red Oolong Ice Cream Bar",ja:"台東紅烏龍茶アイスバー",ko:"타이둥 홍우롱차 아이스크림"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"30.97 mg",price:49,desc:{zh:"熟果與焙火茶韻鮮明，冰涼入口仍保有厚實回甘。",en:"Ripe fruit and roasted tea notes stay full and lingering even when frozen.",ja:"熟した果実と焙煎香が鮮明で、冷たい口どけの後にも深い甘み。",ko:"잘 익은 과일과 배전 향이 선명하며 차갑게 즐겨도 깊은 단맛이 남습니다."}},
+    {id:"vanilla-icecream",name:{zh:"香草牛奶雪糕",en:"Vanilla Milk Ice Cream Bar",ja:"バニラミルクアイスバー",ko:"바닐라 밀크 아이스크림"},price:49,desc:{zh:"香草與牛奶的經典組合，柔滑香甜，簡單耐吃。",en:"A timeless vanilla-and-milk pairing with a smooth, mellow sweetness.",ja:"バニラとミルクの王道コンビ。なめらかでやさしい甘さ。",ko:"바닐라와 우유의 클래식한 조합, 부드럽고 편안한 단맛."}}
+  ]}];
 
 let currentLang = "zh";
 let currentTab = CATS[0].id;
@@ -743,15 +777,23 @@ function getCatalogPrice(cat,item){
     }
     return {
       value:item.box,
-      label:ui.boxPrice
+      label:cat.id === "milk-tea"
+        ? (currentLang === "zh" ? "盒" :
+           currentLang === "en" ? "Box" :
+           currentLang === "ja" ? "箱" : "박스")
+        : ui.boxPrice
     };
   }
 
   return {
     value:item.price,
-    label:currentLang === "zh" ? "盒" :
+    label:cat.id === "latte"
+      ? (currentLang === "zh" ? "杯" :
+         currentLang === "en" ? "Cup" :
+         currentLang === "ja" ? "杯" : "컵")
+      : (currentLang === "zh" ? "盒" :
           currentLang === "en" ? "Box" :
-          currentLang === "ja" ? "箱(Box)" : "박스(Box)"
+          currentLang === "ja" ? "箱(Box)" : "박스(Box)")
   };
 }
 
@@ -795,12 +837,14 @@ function renderCatalogRow(cat,item,index){
           ${meta ? `<div class="catalog-meta">${meta}</div>` : ""}
         </div>
 
-        <div class="catalog-price">
-          ${price.value != null ? `<span class="price">$${price.value}</span>` : ""}
-          ${price.label ? `<div class="catalog-price-label">${price.label}</div>` : ""}
-          ${addon}
-        </div>
-      </div>
+<div class="catalog-price-wrap">
+  <div class="catalog-price">
+    ${price.value != null ? `<span class="price">NT$${price.value}</span>` : ""}
+    ${price.label ? `<span class="catalog-price-label">${price.label}</span>` : ""}
+  </div>
+
+  ${addon}
+</div>
 
       <div class="catalog-notes">
         ${item.desc ? `<div class="catalog-desc-primary">${t(item.desc)}</div>` : ""}
@@ -817,15 +861,26 @@ function getListPrice(cat,item){
     if(cat.priceMode === "drip"){
       return { value:item.drip, label:ui.dripPrice };
     }
-    return { value:item.box, label:ui.boxPrice };
+    return {
+      value:item.box,
+      label:cat.id === "milk-tea"
+        ? (currentLang === "zh" ? "盒" :
+           currentLang === "en" ? "Box" :
+           currentLang === "ja" ? "箱" : "박스")
+        : ui.boxPrice
+    };
   }
 
   return {
     value:item.price,
     label:cat.id === "icecream" ? "" :
-      (currentLang === "zh" ? "盒" :
+      (cat.id === "latte"
+        ? (currentLang === "zh" ? "杯" :
+           currentLang === "en" ? "Cup" :
+           currentLang === "ja" ? "杯" : "컵")
+        : (currentLang === "zh" ? "盒" :
        currentLang === "en" ? "Box" :
-       currentLang === "ja" ? "箱" : "박스")
+       currentLang === "ja" ? "箱" : "박스"))
   };
 }
 
@@ -859,7 +914,7 @@ function renderProductListItem(cat,item,index){
       <span class="product-list-bar" style="background:${barColor}"></span>
 
       <div class="product-list-main">
-        ${item.origin ? `<div class="product-list-origin">${ui.origin}｜${t(item.origin)}</div>` : ""}
+        ${item.origin ? `<div class="product-list-origin">${ui.origin}｜${t(item.origin)}${item.caffeine ? `　${ui.caffeine}｜${item.caffeine}` : ""}</div>` : ""}
         <p class="product-list-name">
           ${t(item.name)}
           ${item.ihTag ? `<span class="ih">（${ui.ih}）</span>` : ""}
@@ -869,11 +924,13 @@ function renderProductListItem(cat,item,index){
         ${item.flavor ? `<span class="product-list-flavor">${t(item.flavor)}</span>` : ""}
       </div>
 
-      <div class="product-list-price">
-        ${price.value != null ? `<div class="price">NT$${price.value}</div>` : ""}
-        ${price.label ? `<div class="label">${price.label}</div>` : ""}
-        ${addon}
-      </div>
+<div class="product-list-price">
+  ${price.value != null ? `<span class="price">NT$${price.value}</span>` : ""}
+  ${price.label ? `<span class="label">${price.label}</span>` : ""}
+</div>
+
+${addon}
+
     </div>`;
 }
 
