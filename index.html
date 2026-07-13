@@ -107,7 +107,6 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
   background:var(--cream-warm);
   border:1px solid var(--line);
   position:relative;
-  cursor:pointer;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -294,8 +293,9 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
   position:relative;
   display:grid;
   grid-template-columns:1fr auto;
+  align-items:center;
   gap:18px;
-  min-height:160px;
+  min-height:100px;
   padding:22px 18px 22px 22px;
   border-bottom:1px dashed rgba(19,42,29,.18);
   background:transparent;
@@ -366,6 +366,12 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
   font-size:10.5px;
   color:var(--deep);
 }
+.product-list-price-wrap{
+    grid-column:2;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+}
 .product-list-price{
     display:flex;
     align-items:baseline;
@@ -388,10 +394,12 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
     color:rgba(26,35,28,.48);
 }
 .product-list-addon{
-  margin-top:4px;
+  margin-top:2px;
+  text-align:right;
   font-size:10px;
   color:var(--med-ox);
   font-weight:700;
+  white-space:nowrap;
 }
 
 .catalog-addon{
@@ -415,7 +423,6 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
   border:1px solid var(--line);
   position:relative;
   overflow:hidden;
-  cursor:pointer;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -590,6 +597,12 @@ footer{background:var(--forest);color:var(--cream);text-align:center;padding:22p
     text-align:left;
     padding-top:0;
   }
+  .product-list-price-wrap{
+    align-items:flex-start;
+  }
+  .product-list-addon{
+    text-align:left;
+  }
   .product-list-specs{
     gap:8px 14px;
   }
@@ -731,8 +744,6 @@ function categoryVisual(cat){
            onload="this.style.display='block';this.parentElement.querySelector('.placeholder-ico').style.display='none';"
            onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-ico').style.display='flex';">
       <span class="placeholder-ico">${cat.ico}</span>
-      <div class="upload-hint">${UI[currentLang].uploadTip}</div>
-      <input type="file" accept="image/*">
     </div>`;
 }
 
@@ -748,8 +759,6 @@ function imgBlock(item, ico){
            onload="this.style.display='block';this.parentElement.querySelector('.placeholder-ico').style.display='none';"
            onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-ico').style.display='flex';">
       <span class="placeholder-ico">${ico}</span>
-      <div class="upload-hint">${UI[currentLang].uploadTip}</div>
-      <input type="file" accept="image/*">
     </div>`;
 }
 
@@ -908,6 +917,13 @@ function renderProductListItem(cat,item,index){
         currentLang === "ja" ? "追加価格 NT$20" :
         "추가 구매가 NT$20"
       }</div>`
+    : cat.id === "latte"
+    ? `<div class="product-list-addon">${
+        currentLang === "zh" ? "更換燕麥奶 +NT$20" :
+        currentLang === "en" ? "Switch to Oat Milk +NT$20" :
+        currentLang === "ja" ? "オーツミルクに変更 +NT$20" :
+        "오트밀크로 변경 +NT$20"
+      }</div>`
     : "";
 
   return `
@@ -925,12 +941,13 @@ function renderProductListItem(cat,item,index){
         ${item.flavor ? `<span class="product-list-flavor">${t(item.flavor)}</span>` : ""}
       </div>
 
-<div class="product-list-price">
-  ${price.value != null ? `<span class="price">NT$${price.value}</span>` : ""}
-  ${price.label ? `<span class="label">${price.label}</span>` : ""}
+<div class="product-list-price-wrap">
+  <div class="product-list-price">
+    ${price.value != null ? `<span class="price">NT$${price.value}</span>` : ""}
+    ${price.label ? `<span class="label">${price.label}</span>` : ""}
+  </div>
+  ${addon}
 </div>
-
-${addon}
 
     </div>`;
 }
@@ -1048,66 +1065,11 @@ function getSearchGroups(){
 }
 
 function wireCategoryVisualUploads(){
-  document.querySelectorAll(".category-visual[data-cat-id]").forEach(box=>{
-    const id = box.dataset.catId;
-    const input = box.querySelector('input[type="file"]');
-    const image = box.querySelector("img");
-    const placeholder = box.querySelector(".placeholder-ico");
-    let saved = null;
-    try{saved = localStorage.getItem("thesavor-category-img:"+id);}catch(error){console.warn(error);}
-    if(saved){
-      image.src = saved;
-      image.style.display = "block";
-      placeholder.style.display = "none";
-    }
-    box.addEventListener("click",()=>input.click());
-    input.addEventListener("click",event=>event.stopPropagation());
-    input.addEventListener("change",event=>{
-      const file = event.target.files?.[0];
-      if(!file) return;
-      const reader = new FileReader();
-      reader.addEventListener("load",event=>{
-        const dataUrl = event.target.result;
-        image.src = dataUrl;
-        image.style.display = "block";
-        placeholder.style.display = "none";
-        try{localStorage.setItem("thesavor-category-img:"+id,dataUrl);}
-        catch(error){console.warn("圖片預覽已顯示，但瀏覽器儲存空間不足：",error);}
-      });
-      reader.readAsDataURL(file);
-    });
-  });
+  // 客人瀏覽頁面不提供圖片上傳功能，圖片一律讀取 images/ 資料夾內的檔案。
 }
 
 function wireImageUploads(){
-  document.querySelectorAll(".item-img[data-id]").forEach(box=>{
-    const id = box.dataset.id;
-    const input = box.querySelector('input[type="file"]');
-    const image = box.querySelector("img");
-    const placeholder = box.querySelector(".placeholder-ico");
-    let saved = null;
-    try{saved = localStorage.getItem("thesavor-img:"+id);}catch(error){console.warn(error);}
-    if(saved){
-      image.src = saved;
-      image.style.display = "block";
-      placeholder.style.display = "none";
-    }
-    box.addEventListener("click",()=>input.click());
-    input.addEventListener("click",event=>event.stopPropagation());
-    input.addEventListener("change",event=>{
-      const file = event.target.files?.[0];
-      if(!file) return;
-      const reader = new FileReader();
-      reader.addEventListener("load",event=>{
-        const dataUrl = event.target.result;
-        image.src = dataUrl;
-        image.style.display = "block";
-        placeholder.style.display = "none";
-        try{localStorage.setItem("thesavor-img:"+id,dataUrl);}catch(error){console.warn("圖片預覽已顯示，但瀏覽器儲存空間不足，重新整理後可能不會保留：",error);}
-      });
-      reader.readAsDataURL(file);
-    });
-  });
+  // 客人瀏覽頁面不提供圖片上傳功能，圖片一律讀取 images/ 資料夾內的檔案。
 }
 
 function renderSearchResults(){
