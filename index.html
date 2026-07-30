@@ -414,38 +414,6 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
 .search-section:first-child{margin-top:0}
 .item{border-bottom:1px dashed var(--line);padding:20px 0;display:flex;gap:12px;align-items:flex-start}
 .item:first-child{padding-top:0}
-.item-img{
-  width:140px;
-  height:140px;
-  border-radius:8px;
-  flex:0 0 140px;
-  background:var(--cream-warm);
-  border:1px solid var(--line);
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.item-img img{width:140px;height:140px;object-fit:cover;display:none}
-.item-img .placeholder-ico{font-size:24px;opacity:.55}
-.item-img .upload-hint{
-  position:absolute;
-  inset:0;
-  background:rgba(19,42,29,.68);
-  color:var(--cream);
-  font-size:9px;
-  line-height:1.45;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  transition:opacity .15s;
-  text-align:center;
-  padding:10px;
-}
-.item-img:hover .upload-hint{opacity:1}
-.item-img input[type=file]{display:none}
 .upload-tip{font-size:11.5px;color:rgba(26,35,28,.5);margin:-8px 0 20px;font-style:italic}
 .ox-bar{width:4px;align-self:stretch;border-radius:2px;flex-shrink:0;margin-top:4px}
 .item-main{flex:1;min-width:0}
@@ -481,8 +449,6 @@ footer{background:var(--forest);color:var(--cream);text-align:center;padding:22p
   .search-wrap,.tabs,main{padding-left:16px;padding-right:16px}
   main{padding-top:24px;padding-bottom:54px}
   .item{gap:12px}
-  .item-img,.item-img img{width:120px;height:120px}
-  .item-img{flex-basis:120px}
   .item-name{font-size:16px}
   .price{font-size:18px}
   /* 搜尋列＋分類頁籤 在手機上捲動時固定在頂部，方便切換 */
@@ -504,13 +470,11 @@ footer{background:var(--forest);color:var(--cream);text-align:center;padding:22p
   .category-visual{max-width:100%;margin-bottom:24px}
   .lang-btn{padding:6px 12px;font-size:12px}
   .tab{padding:12px 13px 10px;font-size:12.5px}
-  .item{display:grid;grid-template-columns:92px 4px minmax(0,1fr);gap:10px}
-  .item.no-ox{grid-template-columns:92px minmax(0,1fr)}
-  .item-img,.item-img img{width:92px;height:92px}
-  .item-img{flex-basis:92px;border-radius:6px}
-  .ox-bar{grid-column:2;grid-row:1;min-height:92px}
-  .item-main{grid-column:3;grid-row:1}
-  .item.no-ox .item-main{grid-column:2}
+  .item{display:grid;grid-template-columns:4px minmax(0,1fr);gap:10px}
+  .item.no-ox{grid-template-columns:minmax(0,1fr)}
+  .ox-bar{grid-column:1;grid-row:1;min-height:40px}
+  .item-main{grid-column:2;grid-row:1}
+  .item.no-ox .item-main{grid-column:1}
   .item-top{flex-direction:column;align-items:flex-start;gap:5px}
   .price-pair{gap:16px}
   .price-pair .pp{text-align:left}
@@ -519,10 +483,8 @@ footer{background:var(--forest);color:var(--cream);text-align:center;padding:22p
   .upload-tip{line-height:1.5}
 }
 @media (max-width:390px){
-  .item{grid-template-columns:82px 4px minmax(0,1fr)}
-  .item.no-ox{grid-template-columns:82px minmax(0,1fr)}
-  .item-img,.item-img img{width:82px;height:82px}
-  .ox-bar{min-height:82px}
+  .item{grid-template-columns:4px minmax(0,1fr)}
+  .item.no-ox{grid-template-columns:minmax(0,1fr)}
   .item-name{font-size:15px}
 }
 
@@ -630,7 +592,7 @@ footer{background:var(--forest);color:var(--cream);text-align:center;padding:22p
 <body>
 <div class="hero">
   <div class="hero-logo">
-    <img src="images/logo.png" alt="THÉ SAVOR Logo">
+    <img src="images/logo.png" alt="THÉ SAVOR Logo" data-fallback="images/logo.jpg,images/logo.jpeg,images/logo.webp" data-idx="0" onerror="handleImgFallback(this)">
   </div>
   <div class="lang-bar">
     <button class="lang-btn active" data-lang="zh">中文</button>
@@ -737,12 +699,37 @@ function renderTabs(){
   });
 }
 
+function imgWithFallback(paths, alt){
+  const first = paths[0];
+  const rest = paths.slice(1).join(",");
+  return `<img alt="${alt}" src="${first}" data-fallback="${rest}" data-idx="0"
+           onload="this.style.display='block';const ph=this.parentElement.querySelector('.placeholder-ico');if(ph)ph.style.display='none';"
+           onerror="handleImgFallback(this)">`;
+}
+
+function handleImgFallback(img){
+  const list = (img.dataset.fallback || "").split(",").filter(Boolean);
+  const idx = parseInt(img.dataset.idx || "0", 10) + 1;
+  if(idx <= list.length && list[idx-1]){
+    img.dataset.idx = idx;
+    img.src = list[idx-1];
+  }else{
+    img.style.display = 'none';
+    const ph = img.parentElement ? img.parentElement.querySelector('.placeholder-ico') : null;
+    if(ph) ph.style.display = 'flex';
+  }
+}
+
 function categoryVisual(cat){
+  const candidates = [
+    `images/${cat.id}.jpg`,
+    `images/${cat.id}.jpeg`,
+    `images/${cat.id}.png`,
+    `images/${cat.id}.webp`
+  ];
   return `
     <div class="category-visual" data-cat-id="${cat.id}">
-      <img alt="${t(cat.name)}" src="images/${cat.id}.jpg"
-           onload="this.style.display='block';this.parentElement.querySelector('.placeholder-ico').style.display='none';"
-           onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-ico').style.display='flex';">
+      ${imgWithFallback(candidates, t(cat.name))}
       <span class="placeholder-ico">${cat.ico}</span>
     </div>`;
 }
@@ -750,16 +737,6 @@ function categoryVisual(cat){
 function renderPromos(cat){
   if(!cat.promos?.length) return "";
   return `<div class="promo-wrap">${cat.promos.map(p=>`<div class="promo">${t(p)}</div>`).join("")}</div>`;
-}
-
-function imgBlock(item, ico){
-  return `
-    <div class="item-img" data-id="${item.id}">
-      <img alt="${t(item.name)}" src="images/${item.id}.jpg"
-           onload="this.style.display='block';this.parentElement.querySelector('.placeholder-ico').style.display='none';"
-           onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-ico').style.display='flex';">
-      <span class="placeholder-ico">${ico}</span>
-    </div>`;
 }
 
 
@@ -1022,7 +999,6 @@ function renderStandardCard(cat,item){
   if(item.craft) specs.push(`<span class="spec"><b>${ui.craft}</b> ${t(item.craft)}</span>`);
   return `
     <div class="item ${item.ox ? "" : "no-ox"}">
-      ${imgBlock(item,cat.ico)}
       ${oxBar}
       <div class="item-main">
         ${item.origin ? `<div class="origin-line">${ui.origin}｜${t(item.origin)}</div>` : ""}
