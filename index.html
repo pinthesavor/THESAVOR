@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+<script>
+function handleImgFallback(img){
+  const list = (img.dataset.fallback || "").split(",").filter(Boolean);
+  const idx = parseInt(img.dataset.idx || "0", 10) + 1;
+  if(idx <= list.length && list[idx-1]){
+    img.dataset.idx = idx;
+    img.src = list[idx-1];
+  }else{
+    img.style.display = 'none';
+    const ph = img.parentElement ? img.parentElement.querySelector('.placeholder-ico') : null;
+    if(ph) ph.style.display = 'flex';
+  }
+}
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>品 THÉ SAVOR — 台灣磨茶專賣</title>
@@ -644,7 +658,12 @@ const dripTeaProducts = [
 const CATS = [{id:"nougat",ico:'<img src="images/icon_nougat.svg" class="menu-icon" alt="">',name:{zh:"THÉ NOUGAT｜茶牛軋糖",en:"THÉ NOUGAT",ja:"THÉ NOUGAT｜ヌガー",ko:"THÉ NOUGAT｜누가"},promos:[{zh:"任選3盒，贈捲餅1盒，加碼贈品牌經典編織袋乙個",en:"Buy Any 3 Boxes, Get 1 Box of Crêpes Free — Plus a Free Branded Bag",ja:"3箱お選びいただくとロールクッキー1箱を無料進呈、さらにブランドオリジナルバッグもプレゼント",ko:"3박스 선택 시 크레페 1박스 무료 증정, 브랜드 클래식 에코백까지 증정"}],items:[
     {id:"original-nougat",name:{zh:"經典原味・牛軋糖",en:"Original Flavor Nougat",ja:"プレーン クラシックオリジナル",ko:"클래식 오리지널 누가"},price:300,desc:{zh:"香濃牛奶熬製而成，加入飽滿杏仁果粒，口感Q彈不黏牙，奶香濃郁中帶有堅果酥脆層次。",en:"Made with premium milk and generously filled with crunchy almond. Soft, chewy, and non-sticky, delivering a rich milky flavor with delightful nutty crunch.",ja:"濃厚なミルクに、香ばしいアーモンドをたっぷり加えました。もちもちで歯にくっつかず、ミルクのコクとナッツのサクサク感が楽しめます。",ko:"진하게 끓여낸 우유로 만든 누가에 통아몬드를 듬뿍 넣었습니다. 쫀득하면서도 이에 달라붙지 않는 식감과 진한 우유 풍미, 바삭한 아몬드의 조화가 매력적입니다."}},
     {id:"amber-oolong-nougat",name:{zh:"琥珀烏龍青・牛軋糖",en:"Amber Oolong Green Tea Nougat",ja:"コハクウーロン茶 アンバーウーロングリーン",ko:"앰버 우롱 그린티 누가"},price:350,desc:{zh:"嚴選琥珀烏龍茶入料，茶香醇厚帶有淡雅焙香，融合香濃牛奶與杏仁果粒，口感Q彈不黏牙，茶韻回甘悠長。",en:"Made with premium Taiwanese Amber Oolong, offering a rich tea aroma with subtle roasted notes. Blended with milk and crunchy almonds for a soft, chewy texture and a lingering sweet tea finish.",ja:"厳選された台湾の「琥珀烏龍茶」を使用し、ほのかな焙煎香が漂う豊かな茶の香りを引き出しました。まろやかなミルク、そしてサクサクとしたアーモンドを組み合わせることで、もちもちとした柔らかな食感と、心地よく続くお茶の甘い余韻をお楽しみいただけます。",ko:"엄선한 대만 호박 우롱차를 사용하여 깊은 차 향과 은은한 볶은 향을 담았습니다. 진한 우유와 아몬드가 어우러져 쫀득한 식감과 긴 여운의 단맛을 선사합니다."}},
-    {id:"matcha-nougat",name:{zh:"抹茶御藏・牛軋糖",en:"Premium Matcha Nougat",ja:"プレミアム抹茶 最上級抹茶",ko:"최상급 말차 누가"},price:450,desc:{zh:"嚴選抹茶融入香醇牛軋糖，散發清雅茶香與微苦回甘，搭配杏仁脆粒，口感細膩且富有層次。",en:"Premium matcha blended into creamy nougat, bringing elegant tea notes with a pleasant bittersweet finish. Crunchy almond pieces add extra texture and depth.",ja:"上質な抹茶をクリーミーなヌガーに練り込み、ほろ苦く上品な茶の香りを引き出しました。サクサクとしたアーモンドを加えることで、豊かな食感と深みのある味わいがお楽しみいただけます。",ko:"엄선한 일본 말차를 넣어 은은한 차 향과 기분 좋은 쌉싸름한 여운을 담았습니다. 바삭한 아몬드가 더해져 풍부한 식감을 완성합니다."}}
+    {id:"matcha-nougat",name:{zh:"抹茶御藏・牛軋糖",en:"Premium Matcha Nougat",ja:"プレミアム抹茶 最上級抹茶",ko:"최상급 말차 누가"},price:450,desc:{zh:"嚴選抹茶融入香醇牛軋糖，散發清雅茶香與微苦回甘，搭配杏仁脆粒，口感細膩且富有層次。",en:"Premium matcha blended into creamy nougat, bringing elegant tea notes with a pleasant bittersweet finish. Crunchy almond pieces add extra texture and depth.",ja:"上質な抹茶をクリーミーなヌガーに練り込み、ほろ苦く上品な茶の香りを引き出しました。サクサクとしたアーモンドを加えることで、豊かな食感と深みのある味わいがお楽しみいただけます。",ko:"엄선한 일본 말차를 넣어 은은한 차 향과 기분 좋은 쌉싸름한 여운을 담았습니다. 바삭한 아몬드가 더해져 풍부한 식감을 완성합니다."}},
+    {id:"taitung-red-oolong-nougat",name:{zh:"台東紅烏龍・牛軋糖",en:"Taitung Red Oolong Tea Nougat",ja:"台東紅烏龍茶ヌガー",ko:"타이둥 홍우롱차 누가"},price:380,desc:{zh:"蘊藏熟果蜜香與溫潤焙火茶韻，融合柔滑牛軋糖與杏仁脆粒，層層堆疊出醇厚回甘的台灣茶韻魅力。",en:"Crafted with Taitung Red Oolong tea powder, the blend features rich ripe fruit aromas and warm roasted tea notes, creating a harmonious blend of tea, milk, and nutty flavors with a lingering Taiwanese tea finish.",ja:"台東産の紅烏烏龍茶パウダーを使用。熟した果実の甘い香りと温かみのある焙煎茶の風味を引き出しました。まろやかで甘い余韻が残る台湾茶特有の魅力を層ごとに楽しめます。",ko:"대만 타이둥 홍오룡차 분말을 사용해 풍부한 숙과향과 은은한 배전 차향을 담았습니다. 부드러운 누가와 바삭한 아몬드가 어우러져 차향, 밀크향, 견과향의 조화로운 풍미와 함께 깊고 달콤한 대만 차의 여운을 전합니다."}}
+  ]},
+  {id:"cube",ico:'<img src="images/icon_cube.svg" class="menu-icon" alt="">',name:{zh:"THÉ CUBE｜小茶方",en:"THÉ CUBE",ja:"THÉ CUBE｜小茶方",ko:"THÉ CUBE｜소차방"},promos:[{zh:"任選3盒，贈捲餅1盒，加碼贈品牌經典編織袋乙個",en:"Buy Any 3 Boxes, Get 1 Box of Crêpes Free — Plus a Free Branded Bag",ja:"3箱お選びいただくとロールクッキー1箱を無料進呈、さらにブランドオリジナルバッグもプレゼント",ko:"3박스 선택 시 크레페 1박스 무료 증정, 브랜드 클래식 에코백까지 증정"}],items:[
+    {id:"tieguanyin-cube",name:{zh:"鐵觀音・小茶方",en:"Tieguanyin Tea Cube",ja:"鉄観音茶 小茶方",ko:"철관음차 소차방"},price:350,desc:{zh:"充滿焙火香氣圓潤茶湯，交織醇厚奶香。質地Q彈不黏牙，飽滿茶感與深沉的熟果火韻。",en:"Smooth roasted tea blended with rich milk. Chewy and non-sticky, featuring a full-bodied tea flavor with deep roasted fruit notes.",ja:"香ばしい焙煎茶と濃厚なミルクが調和。歯につかないもちもち食感で、深みのある熟した果実の余韻を楽しめます。",ko:"깊은 로스팅 향의 철관음차와 진한 밀크의 조화. 쫀득한 식감과 깊은 차의 풍미를 담았습니다."}},
+    {id:"paozhong-cube",name:{zh:"包種茶・小茶方",en:"Paozhong Tea Cube",ja:"包種茶 小茶方",ko:"포종차 소차방"},price:350,desc:{zh:"包種茶發酵的清雅花香，完美融入溫潤乳香。質地Q彈不黏牙，茶香清透不甜膩，彷彿現泡茶湯般的清新回甘。",en:"Lightly fermented Paochong tea with elegant floral notes, seamlessly blended with smooth milk. Chewy, non-sticky, and refreshing with a crisp, sweet finish.",ja:"上品な花香の包種茶とまろやかなミルクが調和。歯につかないもちもち食感で、淹れたてのお茶のように爽やかです。",ko:"은은한 꽃향의 포종차와 부드러운 밀크의 조화. 쫀득한 식감과 깔끔한 차의 여운을 담았습니다."}}
   ]},
   {id:"crepes",ico:'<img src="images/icon_crepe.svg" class="menu-icon" alt="">',name:{zh:"THÉ ROULEAU｜茶捲餅",en:"THÉ ROULEAU",ja:"THÉ ROULEAU｜ロールクッキー",ko:"THÉ ROULEAU｜크레페"},promos:[{zh:"任選3盒，贈捲餅1盒，加碼贈品牌經典編織袋乙個",en:"Buy Any 3 Boxes, Get 1 Box of Crêpes Free — Plus a Free Branded Bag",ja:"3箱お選びいただくとロールクッキー1箱を無料進呈、さらにブランドオリジナルバッグもプレゼント",ko:"3박스 선택 시 크레페 1박스 무료 증정, 브랜드 클래식 에코백까지 증정"}],items:[
     {id:"black-tea-crepe",name:{zh:"錫蘭紅茶捲餅",en:"Black Tea Crêpes",ja:"紅茶ロールクッキー",ko:"실론 홍차 크레페"},price:300,desc:{zh:"採用錫蘭紅茶製作，茶香醇厚甘潤，搭配香酥捲餅口感，入口散發濃郁茶韻與自然麥香。",en:"Made with premium Ceylon black tea. The crispy texture delivers rich tea aroma balanced with natural wheat notes for a delightfully crisp bite.",ja:"上質なセイロン紅茶を使用し、サクサクとした食感のなかに、豊かな茶の香りと自然な小麦の風味が絶妙に調和した、軽やかで心地よい美味しさをお楽しみいただけます。",ko:"실론 홍차를 사용하여 깊고 부드러운 홍차 향을 담았습니다. 바삭한 롤 웨이퍼와 어우러져 자연스러운 밀 향이 은은하게 퍼집니다."}},
@@ -705,19 +724,6 @@ function imgWithFallback(paths, alt){
   return `<img alt="${alt}" src="${first}" data-fallback="${rest}" data-idx="0"
            onload="this.style.display='block';const ph=this.parentElement.querySelector('.placeholder-ico');if(ph)ph.style.display='none';"
            onerror="handleImgFallback(this)">`;
-}
-
-function handleImgFallback(img){
-  const list = (img.dataset.fallback || "").split(",").filter(Boolean);
-  const idx = parseInt(img.dataset.idx || "0", 10) + 1;
-  if(idx <= list.length && list[idx-1]){
-    img.dataset.idx = idx;
-    img.src = list[idx-1];
-  }else{
-    img.style.display = 'none';
-    const ph = img.parentElement ? img.parentElement.querySelector('.placeholder-ico') : null;
-    if(ph) ph.style.display = 'flex';
-  }
 }
 
 function categoryVisual(cat){
@@ -804,14 +810,7 @@ function renderCatalogRow(cat,item,index){
   const secondaryDesc = getSecondaryText(item.desc);
   const meta = getCatalogMeta(cat,item);
 
-  const addon = cat.id === "icecream"
-    ? `<div class="catalog-addon">${
-        currentLang === "zh" ? "加購價 NT$20" :
-        currentLang === "en" ? "Add-on NT$20" :
-        currentLang === "ja" ? "追加価格 NT$20" :
-        "추가 구매가 NT$20"
-      }</div>`
-    : "";
+  const addon = "";
 
   return `
     <div class="catalog-row">
@@ -887,14 +886,7 @@ function renderProductListItem(cat,item,index){
     specs.push(`<span class="product-list-spec"><b>${ui.craft}</b>${t(item.craft)}</span>`);
   }
 
-  const addon = cat.id === "icecream"
-    ? `<div class="product-list-addon">${
-        currentLang === "zh" ? "加購價 NT$20" :
-        currentLang === "en" ? "Add-on NT$20" :
-        currentLang === "ja" ? "追加価格 NT$20" :
-        "추가 구매가 NT$20"
-      }</div>`
-    : cat.id === "latte"
+  const addon = cat.id === "latte"
     ? `<div class="product-list-addon">${
         currentLang === "zh" ? "更換燕麥奶 +NT$20" :
         currentLang === "en" ? "Switch to Oat Milk +NT$20" :
@@ -1004,7 +996,7 @@ function renderStandardCard(cat,item){
         ${item.origin ? `<div class="origin-line">${ui.origin}｜${t(item.origin)}</div>` : ""}
         <div class="item-top">
           <p class="item-name display">${t(item.name)}${item.ihTag ? `<span class="ih">（${ui.ih}）</span>` : ""}</p>
-          ${item.price ? `<div class="price">NT$${item.price}${cat.id === "icecream" ? `<div class="addon-price">${currentLang === "zh" ? "加購價 NT$20" : currentLang === "en" ? "Add-on Price NT$20" : currentLang === "ja" ? "追加価格 NT$20" : "추가 구매가 NT$20"}</div>` : ""}</div>` : ""}
+          ${item.price ? `<div class="price">NT$${item.price}</div>` : ""}
         </div>
         ${item.desc ? `<p class="item-desc">${t(item.desc)}</p>` : ""}
         ${specs.length ? `<div class="spec-row">${specs.join("")}</div>` : ""}
