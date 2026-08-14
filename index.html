@@ -457,7 +457,21 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
 .legend-item .desc{color:rgba(26,35,28,.6);font-size:11.5px;line-height:1.5}
 .empty-state{padding:54px 20px;text-align:center;color:rgba(26,35,28,.58);border:1px dashed var(--line);border-radius:8px}
 .empty-state strong{display:block;color:var(--deep);margin-bottom:6px}
-footer{background:var(--forest);color:var(--cream);text-align:center;padding:22px 24px;font-size:11.5px;letter-spacing:.08em}
+footer{background:var(--forest);color:var(--cream);text-align:center;padding:28px 24px 26px;font-size:11.5px;letter-spacing:.08em}
+.footer-tagline{margin:0 0 18px}
+.footer-info{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:20px;letter-spacing:normal}
+.footer-divider{width:1px;height:34px;background:rgba(239,233,220,.25)}
+.footer-line{display:flex;align-items:center;gap:10px;text-align:left}
+.footer-qr{display:block;border-radius:3px;background:var(--cream);padding:3px}
+.footer-line-text{display:flex;flex-direction:column;gap:3px;font-size:12px}
+.footer-detail{display:flex;flex-direction:column;gap:3px;font-size:12px;text-align:left}
+.footer-label{font-size:10px;color:rgba(239,233,220,.6);text-transform:uppercase;letter-spacing:.1em}
+.footer-info a{color:var(--cream);text-decoration:none;font-weight:600}
+.footer-info a:hover{text-decoration:underline}
+@media (max-width:680px){
+  .footer-info{flex-direction:column;gap:14px}
+  .footer-divider{width:100%;height:1px}
+}
 @media (max-width:680px){
   .hero{padding:30px 18px 20px}
   .search-wrap,.tabs,main{padding-left:16px;padding-right:16px}
@@ -631,10 +645,10 @@ footer{background:var(--forest);color:var(--cream);text-align:center;padding:22p
 
 <script>
 const UI = {
-  zh:{unitBag:"包",unitBox:"盒",ih:"冰／熱",origin:"茶葉產地",oxidation:"發酵度",roast:"焙度",craft:"焙煎工藝",caffeine:"咖啡因含量",bagPrice:"茶包",boxPrice:"原葉茶",dripPrice:"濾掛包",footer:"感受台灣茶最純粹的風味",uploadTip:"正式圖片請放入 images 資料夾；點擊圖片可先在本機測試預覽",searchPlaceholder:"搜尋茶品、口味或商品介紹…",searchResult:"搜尋結果",noResult:"找不到符合的商品",noResultHint:"請嘗試其他關鍵字"},
-  en:{unitBag:"bag",unitBox:"box",ih:"Iced / Hot",origin:"Tea Origin",caffeine:"Caffeine",oxidation:"Oxidation",roast:"Roast Level",craft:"Craftsmanship",bagPrice:"Tea Bag",boxPrice:"Loose Leaf",dripPrice:"Drip Bag",footer:"Taste the purest flavor of Taiwanese tea",uploadTip:"Add real photos to the images folder; click a photo to test a local preview",searchPlaceholder:"Search tea, flavor, or description…",searchResult:"Search Results",noResult:"No matching products",noResultHint:"Try another keyword"},
-  ja:{unitBag:"包",unitBox:"箱",ih:"アイス／ホット",origin:"茶の原産地",caffeine:"カフェイン含有量",oxidation:"発酵度",roast:"焙煎度",craft:"焙煎工芸",bagPrice:"ティーバッグ",boxPrice:"原葉茶",dripPrice:"ドリップバッグ",footer:"台湾茶の最も純粋な味わいを",uploadTip:"正式な写真は images フォルダに追加してください。クリックするとローカルでプレビューできます",searchPlaceholder:"茶名・風味・商品説明を検索…",searchResult:"検索結果",noResult:"該当する商品が見つかりません",noResultHint:"別のキーワードをお試しください"},
-  ko:{unitBag:"팩",unitBox:"박스",ih:"아이스 / 핫",origin:"차 원산지",caffeine:"카페인 함량",oxidation:"발효도",roast:"배전 정도",craft:"배전 공예",bagPrice:"티백",boxPrice:"원엽차",dripPrice:"드립백",footer:"대만차의 가장 순수한 맛을 느껴보세요",uploadTip:"실제 사진은 images 폴더에 추가하세요. 클릭하면 로컬에서 미리보기 가능합니다",searchPlaceholder:"차, 풍미 또는 상품 설명 검색…",searchResult:"검색 결과",noResult:"일치하는 상품이 없습니다",noResultHint:"다른 키워드를 입력해 보세요"}
+  zh:{unitBag:"包",unitBox:"盒",ih:"冰／熱",origin:"茶葉產地",oxidation:"發酵度",roast:"焙度",craft:"焙煎工藝",caffeine:"咖啡因含量",bagPrice:"茶包",boxPrice:"原葉茶",dripPrice:"濾掛包",footer:"感受台灣茶最純粹的風味",uploadTip:"正式圖片請放入 images 資料夾；點擊圖片可先在本機測試預覽",searchPlaceholder:"搜尋茶品、口味或商品介紹…",searchResult:"搜尋結果",noResult:"找不到符合的商品",noResultHint:"請嘗試其他關鍵字",lineOrder:"LINE 訂購",address:"地址",tel:"電話"},
+  en:{unitBag:"bag",unitBox:"box",ih:"Iced / Hot",origin:"Tea Origin",caffeine:"Caffeine",oxidation:"Oxidation",roast:"Roast Level",craft:"Craftsmanship",bagPrice:"Tea Bag",boxPrice:"Loose Leaf",dripPrice:"Drip Bag",footer:"Taste the purest flavor of Taiwanese tea",uploadTip:"Add real photos to the images folder; click a photo to test a local preview",searchPlaceholder:"Search tea, flavor, or description…",searchResult:"Search Results",noResult:"No matching products",noResultHint:"Try another keyword",lineOrder:"LINE Order",address:"Address",tel:"Tel"},
+  ja:{unitBag:"包",unitBox:"箱",ih:"アイス／ホット",origin:"茶の原産地",caffeine:"カフェイン含有量",oxidation:"発酵度",roast:"焙煎度",craft:"焙煎工芸",bagPrice:"ティーバッグ",boxPrice:"原葉茶",dripPrice:"ドリップバッグ",footer:"台湾茶の最も純粋な味わいを",uploadTip:"正式な写真は images フォルダに追加してください。クリックするとローカルでプレビューできます",searchPlaceholder:"茶名・風味・商品説明を検索…",searchResult:"検索結果",noResult:"該当する商品が見つかりません",noResultHint:"別のキーワードをお試しください",lineOrder:"LINE 注文",address:"住所",tel:"電話"},
+  ko:{unitBag:"팩",unitBox:"박스",ih:"아이스 / 핫",origin:"차 원산지",caffeine:"카페인 함량",oxidation:"발효도",roast:"배전 정도",craft:"배전 공예",bagPrice:"티백",boxPrice:"원엽차",dripPrice:"드립백",footer:"대만차의 가장 순수한 맛을 느껴보세요",uploadTip:"실제 사진은 images 폴더에 추가하세요. 클릭하면 로컬에서 미리보기 가능합니다",searchPlaceholder:"차, 풍미 또는 상품 설명 검색…",searchResult:"검색 결과",noResult:"일치하는 상품이 없습니다",noResultHint:"다른 키워드를 입력해 보세요",lineOrder:"LINE 주문",address:"주소",tel:"전화"}
 };
 
 const milkTeaProducts = [
@@ -1073,8 +1087,27 @@ function render(){
       ${renderInfo(cat)}`;
   }
 
-  document.getElementById("footer").textContent =
-    "PURE TEA, PURE EXPERIENCE ｜ " + UI[currentLang].footer;
+  document.getElementById("footer").innerHTML = `
+    <p class="footer-tagline">PURE TEA, PURE EXPERIENCE ｜ ${UI[currentLang].footer}</p>
+    <div class="footer-info">
+      <div class="footer-line">
+        <img class="footer-qr" src="images/line_qrcode.png" alt="LINE QR Code" width="70" height="70">
+        <div class="footer-line-text">
+          <span class="footer-label">${UI[currentLang].lineOrder}</span>
+          <a href="https://lin.ee/SkT4Ppw" target="_blank" rel="noopener">@pinthesavor.tw</a>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-detail">
+        <span class="footer-label">${UI[currentLang].address}</span>
+        <span>103臺北市大同區迪化街一段68號</span>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-detail">
+        <span class="footer-label">${UI[currentLang].tel}</span>
+        <a href="tel:+886225568168">02-2556-8168</a>
+      </div>
+    </div>`;
 
   wireCategoryVisualUploads();
   wireImageUploads();
