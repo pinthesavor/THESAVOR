@@ -879,7 +879,7 @@ function getListPrice(cat,item){
   return {
     value:item.price,
     label:cat.id === "icecream" ? "" :
-      (cat.id === "latte"
+      (cat.id === "latte" || cat.id === "clair"
         ? (currentLang === "zh" ? "杯" :
            currentLang === "en" ? "Cup" :
            currentLang === "ja" ? "杯" : "컵")
