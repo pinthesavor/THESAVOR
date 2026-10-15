@@ -661,6 +661,22 @@ footer{background:var(--forest);color:var(--cream);padding:32px 40px;font-size:1
   gap:8px;
 }
 
+/* 分類選單：桌機版改為欄位對齊的格狀排列（每排 4 欄，icon 上下對齊）
+   之後新增分類會自動依序接在後面並維持對齊；想改每排數量，只要改 --tab-cols */
+@media (min-width:681px){
+  .tabs{
+    --tab-cols:4;
+    display:grid;
+    grid-template-columns:repeat(var(--tab-cols), minmax(max-content,1fr));
+    justify-content:start;
+  }
+  .tab{
+    justify-self:start;
+    padding-left:8px;
+    padding-right:8px;
+  }
+}
+
 
 .upload-tip{display:none!important;}
 .upload-hint{display:none!important;}
