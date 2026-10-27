@@ -678,6 +678,63 @@ footer{background:var(--forest);color:var(--cream);padding:32px 40px;font-size:1
 }
 
 
+/* ===== 手機版：分類改為「左側按鈕 ＋ 滑出式選單」，主畫面保持完整 =====
+   以下全部包在 max-width:680px 內，桌機版不受影響 */
+.menu-toggle,.menu-backdrop,.drawer-head{display:none}
+@media (max-width:680px){
+  body.menu-open{overflow:hidden}
+  .nav-bar{display:flex;align-items:stretch;gap:10px;padding:0 16px 10px}
+  .nav-bar .search-wrap{flex:1;min-width:0;max-width:none;margin:0;padding:0}
+  .menu-toggle{
+    display:inline-flex;align-items:center;gap:7px;flex-shrink:0;
+    padding:0 16px;border:1px solid var(--forest);background:var(--forest);color:var(--cream);
+    border-radius:999px;font-size:14px;font-weight:500;letter-spacing:.04em;
+    cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .menu-toggle:active{opacity:.85}
+  .menu-toggle{max-width:44%;padding:0 14px;gap:9px;text-align:left}
+  .menu-toggle svg{flex-shrink:0}
+  .menu-text{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+  .menu-label{font-size:10.5px;letter-spacing:.08em;opacity:.7;white-space:nowrap}
+  .menu-current{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .menu-backdrop{
+    display:block;position:fixed;top:0;right:0;bottom:0;left:0;z-index:1;
+    background:rgba(19,42,29,.45);opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  body.menu-open .menu-backdrop{opacity:1;pointer-events:auto}
+  .mobile-nav .tabs{
+    position:fixed;top:0;left:0;bottom:0;z-index:2;
+    width:min(82vw,320px);max-width:none;margin:0;
+    padding:0 0 calc(24px + env(safe-area-inset-bottom,0px));
+    display:flex;flex-direction:column;flex-wrap:nowrap;gap:0;
+    overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+    background:var(--cream);border-bottom:none;box-shadow:6px 0 24px rgba(19,42,29,.18);
+    transform:translateX(-105%);visibility:hidden;
+    transition:transform .28s ease,visibility 0s linear .28s;
+  }
+  body.menu-open .mobile-nav .tabs{transform:none;visibility:visible;transition:transform .28s ease,visibility 0s}
+  .drawer-head{
+    display:flex;align-items:center;justify-content:space-between;
+    position:sticky;top:0;z-index:1;flex-shrink:0;
+    padding:calc(14px + env(safe-area-inset-top,0px)) 8px 12px 20px;
+    background:var(--cream);border-bottom:1px solid var(--line);
+  }
+  .drawer-title{font-size:17px;font-weight:700;color:var(--deep);letter-spacing:.06em}
+  .drawer-close{
+    width:44px;height:44px;border:none;background:none;color:var(--deep);
+    font-size:18px;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .mobile-nav .tabs .tab{
+    width:100%;justify-content:flex-start;text-align:left;white-space:normal;flex-shrink:0;
+    padding:14px 20px 14px 17px;min-height:52px;margin:0;font-size:14.5px;
+    color:rgba(26,35,28,.72);
+    border-bottom:1px dashed var(--line);border-left:3px solid transparent;
+  }
+  .mobile-nav .tabs .tab.active{
+    color:var(--deep);font-weight:700;background:rgba(27,61,40,.07);border-left-color:var(--med-ox);
+  }
+}
+
 .upload-tip{display:none!important;}
 .upload-hint{display:none!important;}
 </style>
@@ -696,13 +753,20 @@ footer{background:var(--forest);color:var(--cream);padding:32px 40px;font-size:1
 </div>
 
 <div class="mobile-nav">
-  <div class="search-wrap">
-    <div class="search-box">
-      <input id="searchInput" type="search" autocomplete="off" aria-label="搜尋商品">
-      <span class="search-icon">⌕</span>
+  <div class="nav-bar">
+    <button type="button" class="menu-toggle" id="menuToggle" aria-controls="tabs" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 4.5h14M2 9h14M2 13.5h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+      <span class="menu-text"><span class="menu-label" id="menuLabel">商品分類</span><span class="menu-current" id="menuCurrent"></span></span>
+    </button>
+    <div class="search-wrap">
+      <div class="search-box">
+        <input id="searchInput" type="search" autocomplete="off" aria-label="搜尋商品">
+        <span class="search-icon">⌕</span>
+      </div>
     </div>
   </div>
 
+  <div class="menu-backdrop" id="menuBackdrop"></div>
   <div class="tabs" id="tabs"></div>
 </div>
 <main id="main"></main>
@@ -710,10 +774,10 @@ footer{background:var(--forest);color:var(--cream);padding:32px 40px;font-size:1
 
 <script>
 const UI = {
-  zh:{unitBag:"包",unitBox:"盒",ih:"冰／熱",origin:"茶葉產地",oxidation:"發酵度",roast:"焙度",craft:"焙煎工藝",caffeine:"咖啡因含量",bagPrice:"茶包",boxPrice:"原葉茶",dripPrice:"濾掛包",footer:"感受台灣茶最純粹的風味",uploadTip:"正式圖片請放入 images 資料夾；點擊圖片可先在本機測試預覽",searchPlaceholder:"搜尋茶品、口味或商品介紹…",searchResult:"搜尋結果",noResult:"找不到符合的商品",noResultHint:"請嘗試其他關鍵字",lineOrder:"LINE 訂購",address:"地址",tel:"電話"},
-  en:{unitBag:"bag",unitBox:"box",ih:"Iced / Hot",origin:"Tea Origin",caffeine:"Caffeine",oxidation:"Oxidation",roast:"Roast Level",craft:"Craftsmanship",bagPrice:"Tea Bag",boxPrice:"Loose Leaf",dripPrice:"Drip Bag",footer:"Taste the purest flavor of Taiwanese tea",uploadTip:"Add real photos to the images folder; click a photo to test a local preview",searchPlaceholder:"Search tea, flavor, or description…",searchResult:"Search Results",noResult:"No matching products",noResultHint:"Try another keyword",lineOrder:"LINE Order",address:"Address",tel:"Tel"},
-  ja:{unitBag:"包",unitBox:"箱",ih:"アイス／ホット",origin:"茶の原産地",caffeine:"カフェイン含有量",oxidation:"発酵度",roast:"焙煎度",craft:"焙煎工芸",bagPrice:"ティーバッグ",boxPrice:"原葉茶",dripPrice:"ドリップバッグ",footer:"台湾茶の最も純粋な味わいを",uploadTip:"正式な写真は images フォルダに追加してください。クリックするとローカルでプレビューできます",searchPlaceholder:"茶名・風味・商品説明を検索…",searchResult:"検索結果",noResult:"該当する商品が見つかりません",noResultHint:"別のキーワードをお試しください",lineOrder:"LINE 注文",address:"住所",tel:"電話"},
-  ko:{unitBag:"팩",unitBox:"박스",ih:"아이스 / 핫",origin:"차 원산지",caffeine:"카페인 함량",oxidation:"발효도",roast:"배전 정도",craft:"배전 공예",bagPrice:"티백",boxPrice:"원엽차",dripPrice:"드립백",footer:"대만차의 가장 순수한 맛을 느껴보세요",uploadTip:"실제 사진은 images 폴더에 추가하세요. 클릭하면 로컬에서 미리보기 가능합니다",searchPlaceholder:"차, 풍미 또는 상품 설명 검색…",searchResult:"검색 결과",noResult:"일치하는 상품이 없습니다",noResultHint:"다른 키워드를 입력해 보세요",lineOrder:"LINE 주문",address:"주소",tel:"전화"}
+  zh:{unitBag:"包",unitBox:"盒",ih:"冰／熱",origin:"茶葉產地",oxidation:"發酵度",roast:"焙度",craft:"焙煎工藝",caffeine:"咖啡因含量",bagPrice:"茶包",boxPrice:"原葉茶",dripPrice:"濾掛包",footer:"感受台灣茶最純粹的風味",uploadTip:"正式圖片請放入 images 資料夾；點擊圖片可先在本機測試預覽",searchPlaceholder:"搜尋茶品、口味或商品介紹…",searchResult:"搜尋結果",noResult:"找不到符合的商品",noResultHint:"請嘗試其他關鍵字",lineOrder:"LINE 訂購",address:"地址",tel:"電話",menuTitle:"商品分類"},
+  en:{unitBag:"bag",unitBox:"box",ih:"Iced / Hot",origin:"Tea Origin",caffeine:"Caffeine",oxidation:"Oxidation",roast:"Roast Level",craft:"Craftsmanship",bagPrice:"Tea Bag",boxPrice:"Loose Leaf",dripPrice:"Drip Bag",footer:"Taste the purest flavor of Taiwanese tea",uploadTip:"Add real photos to the images folder; click a photo to test a local preview",searchPlaceholder:"Search tea, flavor, or description…",searchResult:"Search Results",noResult:"No matching products",noResultHint:"Try another keyword",lineOrder:"LINE Order",address:"Address",tel:"Tel",menuTitle:"Categories"},
+  ja:{unitBag:"包",unitBox:"箱",ih:"アイス／ホット",origin:"茶の原産地",caffeine:"カフェイン含有量",oxidation:"発酵度",roast:"焙煎度",craft:"焙煎工芸",bagPrice:"ティーバッグ",boxPrice:"原葉茶",dripPrice:"ドリップバッグ",footer:"台湾茶の最も純粋な味わいを",uploadTip:"正式な写真は images フォルダに追加してください。クリックするとローカルでプレビューできます",searchPlaceholder:"茶名・風味・商品説明を検索…",searchResult:"検索結果",noResult:"該当する商品が見つかりません",noResultHint:"別のキーワードをお試しください",lineOrder:"LINE 注文",address:"住所",tel:"電話",menuTitle:"カテゴリー"},
+  ko:{unitBag:"팩",unitBox:"박스",ih:"아이스 / 핫",origin:"차 원산지",caffeine:"카페인 함량",oxidation:"발효도",roast:"배전 정도",craft:"배전 공예",bagPrice:"티백",boxPrice:"원엽차",dripPrice:"드립백",footer:"대만차의 가장 순수한 맛을 느껴보세요",uploadTip:"실제 사진은 images 폴더에 추가하세요. 클릭하면 로컬에서 미리보기 가능합니다",searchPlaceholder:"차, 풍미 또는 상품 설명 검색…",searchResult:"검색 결과",noResult:"일치하는 상품이 없습니다",noResultHint:"다른 키워드를 입력해 보세요",lineOrder:"LINE 주문",address:"주소",tel:"전화",menuTitle:"카테고리"}
 };
 
 const milkTeaProducts = [
@@ -804,9 +868,28 @@ let searchQuery = "";
 function t(value){return value?.[currentLang] ?? value?.zh ?? "";}
 function normalize(value){return String(value || "").toLocaleLowerCase().trim();}
 
+function setMenu(open){
+  document.body.classList.toggle("menu-open",open);
+  const toggle = document.getElementById("menuToggle");
+  if(toggle) toggle.setAttribute("aria-expanded",String(open));
+  if(open){
+    const el = document.getElementById("tabs");
+    const active = el.querySelector(".tab.active");
+    if(active) el.scrollTop = Math.max(0, active.offsetTop - 90);
+  }
+}
+
 function renderTabs(){
   const el = document.getElementById("tabs");
   el.innerHTML = "";
+
+  // 手機版滑出選單的標題列（桌機版以 CSS 隱藏）
+  const head = document.createElement("div");
+  head.className = "drawer-head";
+  head.innerHTML = `<span class="drawer-title display">${UI[currentLang].menuTitle}</span><button type="button" class="drawer-close" aria-label="Close">✕</button>`;
+  head.querySelector(".drawer-close").addEventListener("click",()=>setMenu(false));
+  el.appendChild(head);
+
   CATS.forEach(cat=>{
     const button = document.createElement("button");
     button.className = "tab" + (cat.id === currentTab && !searchQuery ? " active" : "");
@@ -816,6 +899,13 @@ function renderTabs(){
       searchQuery = "";
       document.getElementById("searchInput").value = "";
       render();
+      // 手機版：選完後收起選單，並回到商品列表頂端
+      if(window.matchMedia("(max-width:680px)").matches){
+        setMenu(false);
+        const nav = document.querySelector(".mobile-nav");
+        const target = document.getElementById("main").getBoundingClientRect().top + window.scrollY - nav.offsetHeight - 8;
+        if(window.scrollY > target) window.scrollTo({top:Math.max(0,target)});
+      }
     });
     el.appendChild(button);
   });
@@ -1178,6 +1268,10 @@ function render(){
   renderTabs();
   const main = document.getElementById("main");
   document.getElementById("searchInput").placeholder = UI[currentLang].searchPlaceholder;
+  document.getElementById("menuLabel").textContent = UI[currentLang].menuTitle;
+  const curCat = CATS.find(item=>item.id === currentTab) || CATS[0];
+  const curName = t(curCat.name);
+  document.getElementById("menuCurrent").textContent = searchQuery ? UI[currentLang].searchResult : (curName.split("｜").pop() || curName);
 
   if(searchQuery){
     main.innerHTML = `
@@ -1237,6 +1331,11 @@ document.getElementById("searchInput").addEventListener("input",event=>{
   searchQuery = event.target.value.trim();
   render();
 });
+
+document.getElementById("menuToggle").addEventListener("click",()=>setMenu(!document.body.classList.contains("menu-open")));
+document.getElementById("menuBackdrop").addEventListener("click",()=>setMenu(false));
+document.addEventListener("keydown",e=>{ if(e.key === "Escape") setMenu(false); });
+window.addEventListener("resize",()=>{ if(window.innerWidth > 680) setMenu(false); });
 
 render();
 </script>
