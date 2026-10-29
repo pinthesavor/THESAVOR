@@ -445,6 +445,26 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
   font-weight:700;
   color:var(--deep);
 }
+.product-list-price .price-orig{
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;
+  color:rgba(26,35,28,.4);
+  text-decoration:line-through;
+  margin-right:2px;
+}
+.product-list-price .price.sale{
+  color:var(--med-ox);
+}
+.product-list-price .sale-tag{
+  font-size:10px;
+  line-height:1;
+  color:#fff;
+  background:var(--med-ox);
+  border-radius:3px;
+  padding:3px 5px;
+  margin-right:2px;
+  letter-spacing:.04em;
+}
 .product-list-price .label{
     display:inline;
     margin-top:0;
@@ -859,6 +879,10 @@ const CATS = [{id:"nougat",ico:'<img src="images/icon_nougat.svg" class="menu-ic
     {id:"jinxuan-icecream",name:{zh:"阿里山金萱茶雪糕",en:"Alishan Jinxuan Tea Ice Cream Bar",ja:"阿里山金萱茶アイスバー",ko:"알리산 진쉬안차 아이스크림"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"24.45 mg",price:49,desc:{zh:"金萱清甜茶香與奶香交融，入口清爽細緻。",en:"Fresh Jinxuan tea and milk notes blend into a clean, delicate frozen treat.",ja:"金萱の清らかな甘みとミルク香が溶け合う繊細な味。",ko:"진쉬안의 맑은 단맛과 우유 향이 어우러진 섬세한 아이스 바."}},
     {id:"tieguanyin-icecream",name:{zh:"坪林鐵觀音茶雪糕",en:"Pinglin Tieguanyin Ice Cream Bar",ja:"坪林鉄観音茶アイスバー",ko:"핑린 철관음차 아이스크림"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"27.87 mg",price:49,desc:{zh:"溫暖焙火與奶香交疊，風味濃郁卻不厚重。",en:"Warm roast notes layer with milk for a rich yet balanced bar.",ja:"温かな焙煎香とミルクが重なる、濃厚で軽やかな味わい。",ko:"따뜻한 배전 향과 우유 향이 겹쳐 진하지만 무겁지 않은 풍미."}},
     {id:"red-oolong-icecream",name:{zh:"台東紅烏龍茶雪糕",en:"Taitung Red Oolong Ice Cream Bar",ja:"台東紅烏龍茶アイスバー",ko:"타이둥 홍우롱차 아이스크림"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"30.97 mg",price:49,desc:{zh:"熟果與焙火茶韻鮮明，冰涼入口仍保有厚實回甘。",en:"Ripe fruit and roasted tea notes stay full and lingering even when frozen.",ja:"熟した果実と焙煎香が鮮明で、冷たい口どけの後にも深い甘み。",ko:"잘 익은 과일과 배전 향이 선명하며 차갑게 즐겨도 깊은 단맛이 남습니다."}}
+  ]},
+  {id:"daifuku",ico:'<img src="images/icon_daifuku.svg" class="menu-icon" alt="">',name:{zh:"THÉ DAIFUKU｜大福",en:"THÉ DAIFUKU",ja:"THÉ DAIFUKU｜大福",ko:"THÉ DAIFUKU｜다이후쿠"},items:[
+    {id:"redbean-cheese-daifuku",name:{zh:"紅豆乳酪大福",en:"Red Bean Cream Cheese Daifuku",ja:"あずきクリームチーズ大福",ko:"팥 크림치즈 다이후쿠"},origPrice:75,price:60,desc:{zh:"Q彈麻糬包裹綿密紅豆與乳酪內餡，甜而不膩，口感滑順濃郁。",en:"Soft, chewy mochi wrapped around smooth red bean and creamy cheese filling, sweet but never heavy.",ja:"もちもちの求肥で、なめらかな小豆とクリームチーズを包みました。甘さ控えめで濃厚な味わいです。",ko:"쫀득한 찹쌀떡 안에 부드러운 팥과 크림치즈를 가득 담아 달콤하지만 느끼하지 않습니다."}},
+    {id:"jinxuan-chestnut-daifuku",name:{zh:"金萱栗韻乳酪茶大福",en:"Jinxuan Chestnut Cream Cheese Tea Daifuku",ja:"金萱栗クリームチーズ茶大福",ko:"진쉬안 밤 크림치즈 차 다이후쿠"},origPrice:75,price:60,desc:{zh:"金萱茶香融入乳酪內餡，搭配香甜栗子，清雅茶韻與綿密栗香層層交織。",en:"Jinxuan-scented cream cheese paired with sweet chestnut, where delicate tea notes meet a smooth, nutty richness.",ja:"金萱茶の香りを移したクリームチーズに、甘い栗を合わせました。上品な茶の余韻と栗のやさしい甘みが重なります。",ko:"진쉬안차 향을 담은 크림치즈에 달콤한 밤을 더해, 은은한 차향과 부드러운 밤의 풍미가 어우러집니다."}}
   ]}];
 
 let currentLang = "zh";
@@ -1056,6 +1080,8 @@ function getListPrice(cat,item){
     value:item.price,
     label:cat.id === "cold-brew"
       ? (currentLang === "zh" ? "瓶" : currentLang === "en" ? "Bottle" : currentLang === "ja" ? "本" : "병")
+      : cat.id === "daifuku"
+      ? (currentLang === "zh" ? "個" : currentLang === "en" ? "pc" : currentLang === "ja" ? "個" : "개")
       : cat.id === "icecream" ? "" :
       (cat.id === "latte" || cat.id === "clair"
         ? (currentLang === "zh" ? "杯" :
@@ -1124,7 +1150,8 @@ function renderProductListItem(cat,item,index){
 
 <div class="product-list-price-wrap">
   <div class="product-list-price">
-    ${price.value != null ? `<span class="price">NT$${price.value}</span>` : ""}
+    ${item.origPrice ? `<span class="sale-tag">${currentLang === "zh" ? "特價" : currentLang === "en" ? "SALE" : currentLang === "ja" ? "特価" : "특가"}</span><span class="price-orig">NT$${item.origPrice}</span>` : ""}
+    ${price.value != null ? `<span class="price${item.origPrice ? " sale" : ""}">NT$${price.value}</span>` : ""}
     ${price.label ? `<span class="label">${price.label}</span>` : ""}
   </div>
   ${addon}
