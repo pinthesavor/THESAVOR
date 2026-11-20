@@ -349,6 +349,15 @@ main{max-width:920px;margin:0 auto;padding:30px 20px 70px}
   color:rgba(26,35,28,.48);
   margin-left:8px;
 }
+.season-tag{
+  display:inline-block;
+  margin-top:8px;
+  padding:2px 12px;
+  border:1px solid var(--ink);
+  font-size:12px;
+  line-height:1.6;
+  color:var(--ink);
+}
 .product-list-note{
   margin:4px 0 0;
   font-size:10.5px;
@@ -866,7 +875,8 @@ const CATS = [{id:"nougat",ico:'<img src="images/icon_nougat.svg" class="menu-ic
   {id:"latte",ico:'<img src="images/icon_latte.svg" class="menu-icon" alt="">',name:{zh:"THÉ LATTE｜茶歐蕾",en:"THÉ LATTE",ja:"THÉ LATTE｜茶ラテ",ko:"THÉ LATTE｜티 라떼"},promos:[{zh:"｜購買全品項，即享捲餅加購價$20/個｜",en:"Buy Any, Per Crêpe ADD-ON NT$20",ja:"全商品ご購入で、ロールクッキーを1個NT$20で追加購入いただけます",ko:"전 품목 구매 시 크레페 1개 NT$20 추가 구매 가능"},{zh:"※自備環保杯－10元",en:"Bring Your Own Cup & Save NT$10",ja:"マイカップ持参で10元引き",ko:"개인 컵 지참 시 10元 할인"}],items:[
     {id:"jinxuan-latte",name:{zh:"阿里山金萱茶歐蕾",en:"Alishan Jinxuan Tea Latte",ja:"阿里山金萱ティーオレ",ko:"알리산 진쉬안차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"111.5 mg",price:180,ihTag:true,ox:25,oxColor:"var(--light-ox)",roast:{zh:"烘乾（未焙火）",en:"Unroasted",ja:"乾燥（無焙煎）",ko:"건조(비배전)"},desc:{zh:"柔和金萱奶香與鮮奶融合，茶韻清甜，口感滑順。",en:"Soft Jinxuan milk notes blend with fresh milk for a smooth, lightly sweet finish.",ja:"金萱のやわらかなミルク香とミルクが溶け合う、なめらかな味わい。",ko:"진쉬안의 부드러운 우유 향과 신선한 우유가 어우러진 매끄러운 맛."}},
     {id:"tieguanyin-latte",name:{zh:"坪林鐵觀音茶歐蕾",en:"Pinglin Tieguanyin Tea Latte",ja:"坪林鉄観音ティーオレ",ko:"핑린 철관음차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"111.5 mg",price:180,ihTag:true,ox:35,oxColor:"var(--med-ox)",roast:{zh:"7分火（中重焙）",en:"Medium-Heavy Roast",ja:"七分焙煎（中強焙煎）",ko:"7부 배전(중강배전)"},desc:{zh:"焙火香氣沉穩，與奶香平衡融合，呈現成熟濃郁的茶歐蕾風味。",en:"Deep roasted tea character meets milk in a balanced, rich, and mature latte.",ja:"落ち着いた焙煎香とミルクが調和した、深みのあるティーラテ。",ko:"깊은 배전 향과 우유가 균형 있게 어우러진 진한 티 라떼."}},
-    {id:"red-oolong-latte",name:{zh:"台東紅烏龍茶歐蕾",en:"Taitung Red Oolong Tea Latte",ja:"台東紅烏龍ティーオレ",ko:"타이둥 홍우롱차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"111.5 mg",price:180,ihTag:true,ox:80,oxColor:"var(--heavy-ox)",oxNote:{zh:"（重發酵）",en:" (Heavy Oxidation)",ja:"（重発酵）",ko:" (중발효)"},roast:{zh:"重烘焙",en:"Heavy Roast",ja:"深煎り（強焙煎）",ko:"깊은 로스팅(강배전)"},desc:{zh:"熟果、焦糖與木質茶韻濃郁飽滿，加入鮮奶後更顯圓潤厚實。",en:"Ripe fruit, caramel, and woody notes become even rounder and fuller with milk.",ja:"熟した果実、キャラメル、木質香がミルクでさらにまろやかに。",ko:"잘 익은 과일, 캐러멜, 우디 향이 우유와 만나 더욱 둥글고 풍부해집니다."}}
+    {id:"red-oolong-latte",name:{zh:"台東紅烏龍茶歐蕾",en:"Taitung Red Oolong Tea Latte",ja:"台東紅烏龍ティーオレ",ko:"타이둥 홍우롱차 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"111.5 mg",price:180,ihTag:true,ox:80,oxColor:"var(--heavy-ox)",oxNote:{zh:"（重發酵）",en:" (Heavy Oxidation)",ja:"（重発酵）",ko:" (중발효)"},roast:{zh:"重烘焙",en:"Heavy Roast",ja:"深煎り（強焙煎）",ko:"깊은 로스팅(강배전)"},desc:{zh:"熟果、焦糖與木質茶韻濃郁飽滿，加入鮮奶後更顯圓潤厚實。",en:"Ripe fruit, caramel, and woody notes become even rounder and fuller with milk.",ja:"熟した果実、キャラメル、木質香がミルクでさらにまろやかに。",ko:"잘 익은 과일, 캐러멜, 우디 향이 우유와 만나 더욱 둥글고 풍부해집니다."}},
+    {id:"roasted-gold-latte",name:{zh:"焙火流金茶歐蕾",en:"Roasted Gold Tea Latte",ja:"焙火流金ティーオレ",ko:"배화 유금 티 오레"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},caffeine:"85.8 mg",price:180,ihTag:true,seasonal:{zh:"冬季限定",en:"Winter Limited",ja:"冬季限定",ko:"겨울 한정"},ox:80,oxColor:"var(--heavy-ox)",oxNote:{zh:"（重發酵）",en:" (Heavy Oxidation)",ja:"（重発酵）",ko:" (중발효)"},roast:{zh:"重烘焙",en:"Heavy Roast",ja:"深煎り（強焙煎）",ko:"깊은 로스팅(강배전)"},desc:{zh:"烏龍的焙火茶韻，遇上法芙娜 100% 頂級可可，色澤如金流淌。濃郁醇厚，尾韻留著溫潤焙香。",en:"Roasted oolong meets 100% premium Valrhona cocoa in a golden, flowing cup. Rich and full-bodied, with a warm roasted finish.",ja:"烏龍の焙煎香が、ヴァローナ100%の上質なカカオと出会い、黄金色に流れる一杯。濃厚でまろやか、余韻にやさしい焙煎香が残ります。",ko:"우롱의 배전 향이 발로나 100% 프리미엄 카카오와 만나 황금빛으로 흐르는 한 잔. 진하고 묵직하며 따뜻한 배전 향이 길게 남습니다."}}
   ]},
   {id:"clair",ico:'<img src="images/icon_latte.svg" class="menu-icon" alt="">',noVisual:false,name:{zh:"THÉ CLAIR｜茶初萃",en:"THÉ CLAIR",ja:"THÉ CLAIR｜ティーブリュー",ko:"THÉ CLAIR｜티 브루"},promos:[{zh:"｜購買全品項，即享捲餅加購價$20/個｜",en:"Buy Any, Per Crêpe ADD-ON NT$20",ja:"全商品ご購入で、ロールクッキーを1個NT$20で追加購入いただけます",ko:"전 품목 구매 시 크레페 1개 NT$20 추가 구매 가능"}],items:[
     {id:"jinxuan-clair",name:{zh:"阿里山金萱茶初萃",en:"Alishan Jinxuan Tea Brew",ja:"阿里山金萱ティーブリュー",ko:"알리산 진쉬안 티 브루"},origin:{zh:"台灣",en:"Taiwan",ja:"台湾",ko:"대만"},price:100,ihTag:true,ox:25,oxColor:"var(--light-ox)",roast:{zh:"烘乾（未焙火）",en:"Unroasted",ja:"乾燥（無焙煎）",ko:"건조(비배전)"},desc:{zh:"阿里山高山茶區金萱品種，天然奶香入喉，茶湯清甜柔順。",en:"Jinxuan varietal from Alishan's high mountains carries a natural milky aroma, with a tea liquor that's sweet and smooth.",ja:"阿里山高山茶区の金萱品種による、天然のミルクのような香りが特徴。茶湯は甘く滑らかです。",ko:"알리산 고산차 산지의 진쉬안 품종으로, 천연 우유향이 은은하게 감돌며 차탕은 달콤하고 부드럽습니다."}},
@@ -1142,6 +1152,7 @@ function renderProductListItem(cat,item,index){
           ${item.volume ? `<span class="ih">${item.volume}</span>` : ""}
           ${item.ihTag ? `<span class="ih">（${ui.ih}）</span>` : ""}
         </p>
+        ${item.seasonal ? `<div><span class="season-tag">${t(item.seasonal)}</span></div>` : ""}
         ${item.note ? `<p class="product-list-note">${t(item.note)}</p>` : ""}
         ${item.specSheet ? renderSpecSheet(item) : (item.desc ? `<p class="product-list-desc">${t(item.desc)}</p>` : "")}
         ${specs.length ? `<div class="product-list-specs">${specs.join("")}</div>` : ""}
